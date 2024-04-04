@@ -1,0 +1,88 @@
+DROP DATABASE IF EXISTS biskranadifa_database;
+
+CREATE DATABASE biskranadifa_database;
+
+USE biskranadifa_database; 
+
+CREATE TABLE `system-user` (
+
+	`ID` INT NOT NULL AUTO_INCREMENT ,
+	 `name` VARCHAR(50) NULL ,
+ 	`surname` VARCHAR(50) NULL ,
+ 	`phone-number` VARCHAR(12) NULL ,
+	 `hashed-password` TEXT NULL ,
+ 	`date-of-birth` DATE NULL ,
+ 	`gender` ENUM('m','f') NULL ,
+ 	PRIMARY KEY (`ID`)
+);
+
+CREATE TABLE `normal-user` (
+	`ID` INT NOT NULL AUTO_INCREMENT ,
+ 	`name` VARCHAR(50) NULL ,
+ 	`surname` VARCHAR(50) NULL ,
+ 	`phone-number` VARCHAR(12) NULL ,
+ 	`hashed-password` TEXT NULL ,
+ 	`date-of-birth` DATE NULL ,
+ 	`gender` ENUM('m','f') NULL ,
+ 	PRIMARY KEY (`ID`)
+);
+
+CREATE TABLE driver (
+	`ID` INT NOT NULL AUTO_INCREMENT ,
+ 	`name` VARCHAR(50) NULL ,
+ 	`surname` VARCHAR(50) NULL ,
+ 	`phone-number` VARCHAR(12) NULL ,
+ 	`hashed-password` TEXT NULL ,
+	`status` BOOLEAN , 
+ 	`date-of-birth` DATE NULL ,
+ 	`gender` ENUM('m','f') NULL ,
+ 	PRIMARY KEY (`ID`)
+);
+
+CREATE TABLE suggestion (
+	`ID` INT NOT NULL AUTO_INCREMENT ,
+ 	`suggesterID` INT NULL ,
+ 	`suggestion-title` VARCHAR(50) NULL ,
+ 	`suggestion-description` TEXT NULL ,
+ 	PRIMARY KEY (`ID`)
+);
+
+
+ALTER TABLE `suggestion` ADD CONSTRAINT `normal user and suggestions` FOREIGN KEY (`suggesterID`) REFERENCES `normal-user`(`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+CREATE TABLE report (
+	`ID` INT NOT NULL AUTO_INCREMENT ,
+	 `reporterID` INT NOT NULL ,
+	 `report-type` VARCHAR(30) NOT NULL ,
+	 `report-description` TEXT NOT NULL ,
+	 `report-location` VARCHAR(70) NOT NULL ,
+	 `report-picture` LONGBLOB NOT NULL ,
+	 PRIMARY KEY (`ID`)
+);
+
+ALTER TABLE `report` ADD CONSTRAINT `report and reporter` FOREIGN KEY (`reporterID`) REFERENCES `normal-user`(`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+CREATE TABLE `clean-task` (
+	`ID` INT NOT NULL AUTO_INCREMENT ,
+	 `assignerID` INT NOT NULL ,
+	 `assignedID` INT NOT NULL ,
+	  PRIMARY KEY (`ID`)
+);
+
+ALTER TABLE `clean-task` ADD CONSTRAINT `task and assigner` FOREIGN KEY (`assignerID`) REFERENCES `system-user`(`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `clean-task` ADD CONSTRAINT `task and assigned` FOREIGN KEY (`assignedID`) REFERENCES `driver`(`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+ALTER TABLE `report` ADD `image-data` LONGBLOB NOT NULL AFTER `report-picture`;
+
+ALTER TABLE `report` ADD `created-at` INT NOT NULL AFTER `image-data`;
+
+`clean-task` ADD `reportID` INT NOT NULL AFTER `assignedID`;
+
+ALTER TABLE `clean-task` ADD CONSTRAINT `task and report` FOREIGN KEY (`reportID`) REFERENCES `report`(`ID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `clean-task` ADD `created-at` DATETIME NULL AFTER `reportID`, ADD `finished-at` DATETIME NULL AFTER `created-at`;
+
+ALTER TABLE `clean-task` ADD `task-status` TEXT NOT NULL AFTER `finished-at`;
+
