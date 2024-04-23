@@ -25,10 +25,11 @@ public class reportServiceImp implements  reportsService{
 
 
 
-    public void createReport(Report report, MultipartFile file) throws IOException {
+    public void createReport(Report report) throws IOException {
 
+       /* if(file!=null), MultipartFile file
         report.setImagedata(imageUtils.compressImage(file.getBytes()));
-
+*/
         reportsrepository.save(report);
 
 

@@ -7,6 +7,7 @@ import com.chabiamin.restapidatabase.repository.reportsRepository;
 import com.chabiamin.restapidatabase.service.reportServiceImp;
 import com.chabiamin.restapidatabase.service.suggestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -36,21 +37,22 @@ public class citizenAPi {
 
     }
 
-    @PostMapping("/report")
-    public String createReport(@RequestPart("report")Report report, @RequestPart("image") MultipartFile file ) throws IOException {
+    @PostMapping(path = "/report",consumes = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public String createReport(@RequestPart("report")Report report) throws IOException {
 
         //String filepath=FOLDER_PATH+'report'.getImage();
         /*String filepath=FOLDER_PATH+report.getImage()+".png";
         file.transferTo(new File(filepath));*/
+        //reportsrepository.save(report);,file
+       // , @RequestPart(value = "image",required = false
+        reportServiceImp.createReport(report);
 
-        //reportsrepository.save(report);
-        reportServiceImp.createReport(report,file);
 
-
-    if(file!=null){
+        if(report.getImagedata()==null){
         return "report created successfully  " ;
 
     }else{
+
         return "report created successfully  , file is null  " ;
 
     }
