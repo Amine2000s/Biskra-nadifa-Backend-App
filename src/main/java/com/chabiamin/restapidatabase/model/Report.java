@@ -23,6 +23,10 @@ public class Report {
     String reportDescription;
     @Column(name="report-location")
     String reportLocation;
+    @Column(name="report-longtitude")
+    String reportlongtitude;
+    @Column(name="report-latitude")
+    String reportlatitude;
     @Column(name="report-picture")
     String image ;
     @Column(name="image-data")
@@ -105,4 +109,26 @@ public class Report {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
+
+
+    public String getReportlongtitude() {
+        return reportlongtitude;
+    }
+
+    public void setReportlongtitude(String reportlongtitude) {
+        this.reportlongtitude = reportlongtitude;
+    }
+
+    public String getReportlatitude() {
+        return reportlatitude;
+    }
+
+    public void setReportlatitude(String reportlatitude) {
+        this.reportlatitude = reportlatitude;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
 }
+
