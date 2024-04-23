@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name="report")
-@Builder
+//@Builder
 
 public class Report {
 
@@ -37,7 +37,7 @@ public class Report {
     public Report() {
     }
 
-    public Report(int id, int reporterId, String reportType, String reportDescription, String reportLocation, String image,byte[] imagedata,java.time.LocalDateTime creatAt ) {
+    public Report(int id, int reporterId, String reportType, String reportDescription, String reportLocation, String image,byte[] imagedata,java.time.LocalDateTime creatAt,String reportlongtitude , String reportlatitude ) {
         this.id = id;
         this.reporterId = reporterId;
         this.reportType = reportType;
@@ -46,7 +46,8 @@ public class Report {
         this.image = image;
         this.imagedata = imagedata;
         this.createdAt = creatAt ;
-
+        this.reportlongtitude = reportlongtitude ;
+        this.reportlatitude = reportlatitude;
     }
 
     public int getId() {
