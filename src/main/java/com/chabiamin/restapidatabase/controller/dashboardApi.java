@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Driver;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/dashboard")
@@ -33,6 +34,14 @@ public class dashboardApi {
     public List<Report> getAllReports(){
 
         return  reportServiceImp.getAllReports();
+    }
+
+    @GetMapping("/reports/{reportId}")
+    public Report getReportByid(@PathVariable int reportId){
+
+        Optional<Report> report =  reportServiceImp.getReport(reportId);
+
+        return report.get() ;
     }
 
     @GetMapping("/suggestions")

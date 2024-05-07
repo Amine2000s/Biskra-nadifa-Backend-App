@@ -5,6 +5,7 @@ import lombok.Builder;
 
 import javax.imageio.ImageIO;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 @Entity
 @Table(name="report")
@@ -31,6 +32,7 @@ public class Report {
     String image ;
     @Column(name="image-data")
     byte[] imagedata ;
+
     @Column(name="created-at")
     java.time.LocalDateTime createdAt ;
 
@@ -130,6 +132,23 @@ public class Report {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Report{" +
+                "id=" + id +
+                ", reporterId=" + reporterId +
+                ", reportType='" + reportType + '\'' +
+                ", reportDescription='" + reportDescription + '\'' +
+                ", reportLocation='" + reportLocation + '\'' +
+                ", reportlongtitude='" + reportlongtitude + '\'' +
+                ", reportlatitude='" + reportlatitude + '\'' +
+                ", image='" + image + '\'' +
+                ", imagedata=" + Arrays.toString(imagedata) +
+                ", createdAt=" + createdAt +
+                '}';
     }
 }
 

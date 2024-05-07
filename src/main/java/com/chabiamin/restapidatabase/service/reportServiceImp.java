@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class reportServiceImp implements  reportsService{
@@ -25,11 +26,11 @@ public class reportServiceImp implements  reportsService{
 
 
 
-    public void createReport(Report report) throws IOException {
+    public void createReport(Report report,MultipartFile file) throws IOException {
 
-       /* if(file!=null), MultipartFile file
+       //if(file!=null), MultipartFile file
         report.setImagedata(imageUtils.compressImage(file.getBytes()));
-*/
+
         reportsrepository.save(report);
 
 
@@ -47,8 +48,8 @@ public class reportServiceImp implements  reportsService{
     }
 
     @Override
-    public Report getReport(int reportID) {
-        return null;
+    public Optional<Report> getReport(int reportID) {
+        return reportsrepository.findById(reportID);
     }
 
     @Override
