@@ -23,14 +23,24 @@ public class reportServiceImp implements  reportsService{
 
     }
 
+    public void createReport(Report report) throws IOException {
 
+        //if(file!=null), MultipartFile file
+        // report.setImagedata(imageUtils.compressImage(file.getBytes()));
+        System.out.println("sql query inserted");
+
+        reportsrepository.save(report);
+
+
+
+    }
 
 
     public void createReport(Report report,MultipartFile file) throws IOException {
 
        //if(file!=null), MultipartFile file
-        report.setImagedata(imageUtils.compressImage(file.getBytes()));
-
+       // report.setImagedata(imageUtils.compressImage(file.getBytes()));
+        System.out.println("sql query inserted");
         reportsrepository.save(report);
 
 
@@ -60,11 +70,11 @@ public class reportServiceImp implements  reportsService{
 
         for (Report report:templist) {
 
-            byte[] temp = report.getImagedata();
+            /*byte[] temp = report.getImagedata();
             if(temp==null)continue;
 
             report.setImagedata(imageUtils.decompressImage(temp));
-
+*/
         }
 
         return templist;

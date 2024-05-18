@@ -2,6 +2,7 @@ package com.chabiamin.restapidatabase.model;
 
 import jakarta.persistence.*;
 import lombok.Builder;
+import org.apache.commons.codec.binary.Base64InputStream;
 
 import javax.imageio.ImageIO;
 import java.time.LocalDateTime;

@@ -13,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.locks.ReentrantLock;
@@ -75,12 +78,32 @@ public class citizenAPi {
 
     }
 
-    @PostMapping(value = "/testing")
+    /*@PostMapping(value = "/testing")
     public  String testing(@RequestBody Report report){
 
 
             System.out.println(report.toString());
        return "hello marouane habibi";
+
+    }*/
+    @PostMapping(value = "/testing")
+    public  String testing(@RequestBody Report report) throws IOException {
+
+
+        //System.out.println(report.toString());
+        //String filepath=FOLDER_PATH+report.getImagedata();
+        ByteArrayInputStream bis = new ByteArrayInputStream(report.getImagedata());
+        BufferedImage image = ImageIO.read(bis);
+        bis.close();
+
+        // Save BufferedImage to file
+        File outputFile = new File(FOLDER_PATH+"\\marouane.jpeg");
+        ImageIO.write(image, "jpeg", outputFile);
+
+        //System.out.println("Image saved successfully.");
+        reportServiceImp.createReport(report);
+
+        return "hello marouane habibi";
 
     }
 
