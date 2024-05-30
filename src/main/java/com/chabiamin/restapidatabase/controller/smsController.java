@@ -3,10 +3,7 @@ package com.chabiamin.restapidatabase.controller;
 import com.chabiamin.restapidatabase.model.SmsRequest;
 import com.chabiamin.restapidatabase.service.VerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/sms")
@@ -20,8 +17,11 @@ public class smsController {
     }
 
 
-    @PostMapping("/verification")
-    public void sendSms(@RequestBody SmsRequest smsrequest){
+    @GetMapping("/verification")
+    public void sendSms(){
+
+        SmsRequest smsrequest = new SmsRequest("+21377157757","Hello ! Your verification message is 556633");
+
 
         verificationservice.SendSmsVerification(smsrequest);
 

@@ -19,8 +19,8 @@ public class normalUser {
     @Column(name="phone-number")
 
     String phoneNumber ;
-    @Column(name="hashed-password")
-    String hashedPassword ;
+
+
     @Column(name="date-of-birth")
     java.time.LocalDate dateOfBirth ;
     @Column(name="gender")
@@ -32,12 +32,11 @@ public class normalUser {
     public normalUser() {
     }
 
-    public normalUser(int id, String name, String surName, String phoneNumber, String hashedPassword, java.time.LocalDate dateOfBirth, String gender) {
+    public normalUser(int id, String name, String surName, String phoneNumber, java.time.LocalDate dateOfBirth, String gender) {
         this.id = id;
         this.name = name;
         this.surName = surName;
         this.phoneNumber = phoneNumber;
-        this.hashedPassword = hashedPassword;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
     }
@@ -73,15 +72,6 @@ public class normalUser {
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
-
-    public String getHashedPassword() {
-        return hashedPassword;
-    }
-
-    public void setHashedPassword(String hashedPassword) {
-        this.hashedPassword = hashedPassword;
-    }
-
 
 
     public java.time.LocalDate getDateOfBirth() {

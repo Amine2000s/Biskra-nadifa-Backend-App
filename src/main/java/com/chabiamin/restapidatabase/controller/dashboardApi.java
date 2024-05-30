@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+
 @RequestMapping("/dashboard")
 public class dashboardApi {
 
@@ -30,6 +32,13 @@ public class dashboardApi {
         return dashboardserviceimp.getAllDrivers() ;
     }
 
+    @PostMapping("driver/create")
+    public String createDriver(@RequestBody driver driverobj){
+
+                dashboardserviceimp.createDriver(driverobj);
+
+        return "driver created with succes" ;
+    }
     @GetMapping("/reports")
     public List<Report> getAllReports(){
 
@@ -42,6 +51,17 @@ public class dashboardApi {
         Optional<Report> report =  reportServiceImp.getReport(reportId);
 
         return report.get() ;
+    }
+
+
+    @DeleteMapping("/report/{reportId}")
+    public String deleteReportByid(@PathVariable int reportId){
+
+        reportServiceImp.deleteReport(reportId);
+
+        System.out.println("Delete OPeration DOne with sucees ");
+
+        return "Delete OPeration DOne with sucees " ;
     }
 
     @GetMapping("/suggestions")
@@ -62,11 +82,15 @@ public class dashboardApi {
 
         return dashboardserviceimp.getTaskbyID(taskId) ;
     }
+   // http://localhost:8083/dashboard/tasks/?reportId=2&assignerId=3&assignedId=4
 
-    @PostMapping("/tasks")
-    public String createTask(@RequestParam int reportId , int assignerId,int assignedId ){
+
+
+    @PutMapping("/assigntask/{reportId}/{assignerId}/{assignedId}")
+    public String createTask(@PathVariable("reportId") int reportId , @PathVariable("assignerId") int assignerId,@PathVariable("assignedId") int assignedId ){
 
         dashboardserviceimp.CreateTask(reportId,assignerId,assignedId);
+        System.out.println("helllo");
         return "creation of task done with success " ;
     }
 
@@ -84,6 +108,13 @@ public class dashboardApi {
 
         return dashboardserviceimp.getAllCitizens() ;
     }
+
+    @GetMapping("/systemusers")
+    public List<systemUser> getAllSystemusers(){
+
+        return dashboardserviceimp.getAllSystemUsers() ;
+    }
+
 
 
 }

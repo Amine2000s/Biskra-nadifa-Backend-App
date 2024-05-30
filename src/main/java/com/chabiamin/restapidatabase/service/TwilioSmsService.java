@@ -23,7 +23,7 @@ public class TwilioSmsService implements SmsSender{
     @Override
     public void sendSms(SmsRequest smsRequest) {
 
-        PhoneNumber to =new PhoneNumber(smsRequest.getPhoneNumber());
+        PhoneNumber to =new PhoneNumber("+213777157757");
         PhoneNumber from =new PhoneNumber(twilioconfig.getPhoneNumber());
         String message = smsRequest.getMessage() ;
 

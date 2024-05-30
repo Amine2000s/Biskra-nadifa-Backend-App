@@ -53,16 +53,15 @@ public class citizenAPi {
        // , @RequestPart(value = "image",required = false
         reportServiceImp.createReport(report,file);
 
-        System.out.println(report.toString());
+     //   System.out.println(report.toString());
         System.out.println(report.toString());
 
         if(file.getBytes()!=null){
         return "report created successfully  " ;
 
     }else{
-            System.out.println("nooooo image");
-
-        return "report created successfully  , file is null  " ;
+       //     System.out.println("nooooo image");
+        return "report created successfully  , image data is empty  " ;
 
     }
 
@@ -86,8 +85,8 @@ public class citizenAPi {
        return "hello marouane habibi";
 
     }*/
-    @PostMapping(value = "/testing")
-    public  String testing(@RequestBody Report report) throws IOException {
+    @PostMapping(value = "/uploadReport")
+    public  String uploadReport(@RequestBody Report report) throws IOException {
 
 
         //System.out.println(report.toString());
@@ -97,13 +96,13 @@ public class citizenAPi {
         bis.close();
 
         // Save BufferedImage to file
-        File outputFile = new File(FOLDER_PATH+"\\marouane.jpeg");
+        File outputFile = new File(FOLDER_PATH+"\\"+report.getImage()+".jpeg");
         ImageIO.write(image, "jpeg", outputFile);
 
         //System.out.println("Image saved successfully.");
         reportServiceImp.createReport(report);
 
-        return "hello marouane habibi";
+        return "Upload Done With Success";
 
     }
 

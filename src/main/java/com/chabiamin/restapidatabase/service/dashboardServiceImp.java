@@ -119,4 +119,17 @@ public class dashboardServiceImp implements dashboardService{
     public List<cleanTask> getAllTaskCleaning() {
         return cleantaskrepository.findAll();
     }
+
+
+    public void createDriver(driver driverobj){
+        driverrepository.save(driverobj);
+    }
+
+    public List<systemUser> getAllSystemUsers(){
+
+            System.out.println("system retrieve all ");
+
+           return systemuserrepository.findAll();
+    }
+
 }
