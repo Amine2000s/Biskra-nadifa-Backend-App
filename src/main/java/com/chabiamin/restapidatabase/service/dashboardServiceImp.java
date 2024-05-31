@@ -22,6 +22,8 @@ public class dashboardServiceImp implements dashboardService{
     normalUserRepository normalUserRepository ;
     cleanTaskRepository cleantaskrepository ;
 
+    modernBinServiceImp modernbinserviceImp ;
+
     /**
      * now mazal
      *
@@ -34,7 +36,8 @@ public class dashboardServiceImp implements dashboardService{
     public dashboardServiceImp( driverRepository driverrepository , reportsRepository reportsrepository ,sugesstionsRepository sugesstionsrepository ,
                                 cleanTaskRepository cleantaskrepository,
                                 normalUserRepository normalUserRepository,
-                                systemUserRepository systemuserrepository
+                                systemUserRepository systemuserrepository,
+                                modernBinServiceImp modernbinserviceImp
 ) {
 
         this.driverrepository=driverrepository;
@@ -43,6 +46,7 @@ public class dashboardServiceImp implements dashboardService{
         this.cleantaskrepository = cleantaskrepository ;
         this.normalUserRepository=normalUserRepository;
         this.systemuserrepository=systemuserrepository;
+        this.modernbinserviceImp = modernbinserviceImp;
     }
 
     @Override
@@ -131,5 +135,30 @@ public class dashboardServiceImp implements dashboardService{
 
            return systemuserrepository.findAll();
     }
+
+    public List<modernBin> getAllBin() {
+
+
+
+        return modernbinserviceImp.getAllBin() ;
+    }
+
+    public void addBin(modernBin moderbin) {
+
+        modernbinserviceImp.addBin(moderbin);
+
+
+    }
+
+    public void deleteBin(int id) {
+
+        modernbinserviceImp.deleteBin(id);
+
+
+
+    }
+
+
+
 
 }

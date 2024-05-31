@@ -17,6 +17,7 @@ public class dashboardApi {
 
     reportServiceImp reportServiceImp ;
 
+
     dashboardServiceImp dashboardserviceimp;
 
     public dashboardApi(reportServiceImp reportServiceImp1, dashboardServiceImp dashboardserviceimp){
@@ -116,5 +117,27 @@ public class dashboardApi {
     }
 
 
+    @GetMapping("/bins")
+    public List<modernBin> getAllbins(){
+
+        return dashboardserviceimp.getAllBin() ;
+    }
+
+    @PostMapping("/bins/create")
+    public void createBin(@RequestBody modernBin bin){
+
+        dashboardserviceimp.addBin(bin);
+
+
+    }
+
+    @DeleteMapping("bins/bin/{binid}")
+    public void deleteBinbyID(@PathVariable int binid){
+
+        dashboardserviceimp.deleteBin(binid);
+
+
+
+    }
 
 }

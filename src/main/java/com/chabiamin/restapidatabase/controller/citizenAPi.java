@@ -2,8 +2,10 @@ package com.chabiamin.restapidatabase.controller;
 
 
 import com.chabiamin.restapidatabase.model.Report;
+import com.chabiamin.restapidatabase.model.modernBin;
 import com.chabiamin.restapidatabase.model.sugesstion;
 import com.chabiamin.restapidatabase.repository.reportsRepository;
+import com.chabiamin.restapidatabase.service.modernBinServiceImp;
 import com.chabiamin.restapidatabase.service.reportServiceImp;
 import com.chabiamin.restapidatabase.service.suggestionService;
 import jakarta.annotation.Nullable;
@@ -18,6 +20,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
 @RestController
@@ -29,16 +32,20 @@ public class citizenAPi {
 
     reportsRepository reportsrepository ;
 
+    modernBinServiceImp modernBinServiceImp;
+
     public static final String FOLDER_PATH = "C:\\Users\\amin\\Desktop\\Biskra_nadifa\\storedimages\\";
 
     @Autowired
     public citizenAPi ( reportServiceImp reportServiceImp1,
                         reportsRepository reportsrepository,
-                        suggestionService suggestionservice){
+                        suggestionService suggestionservice,
+                        modernBinServiceImp modernBinServiceImp){
 
         this.reportServiceImp = reportServiceImp1 ;
         this.reportsrepository = reportsrepository;
         this.suggestionService = suggestionservice ;
+        this.modernBinServiceImp = modernBinServiceImp;
 
 
     }
@@ -105,7 +112,11 @@ public class citizenAPi {
         return "Upload Done With Success";
 
     }
+    @GetMapping("/bins")
+    public List<modernBin> getAllbins(){
 
+        return modernBinServiceImp.getAllBin() ;
+    }
 
 
 
