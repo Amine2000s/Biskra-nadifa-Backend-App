@@ -4,10 +4,9 @@ package com.chabiamin.restapidatabase.controller;
 import com.chabiamin.restapidatabase.model.Report;
 import com.chabiamin.restapidatabase.model.modernBin;
 import com.chabiamin.restapidatabase.model.sugesstion;
+import com.chabiamin.restapidatabase.model.trashCollectionSchedule;
 import com.chabiamin.restapidatabase.repository.reportsRepository;
-import com.chabiamin.restapidatabase.service.modernBinServiceImp;
-import com.chabiamin.restapidatabase.service.reportServiceImp;
-import com.chabiamin.restapidatabase.service.suggestionService;
+import com.chabiamin.restapidatabase.service.*;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -34,18 +33,23 @@ public class citizenAPi {
 
     modernBinServiceImp modernBinServiceImp;
 
+
+    trashCollectionScheduleServiceImp trashcollectionScheduleservice ;
+
     public static final String FOLDER_PATH = "C:\\Users\\amin\\Desktop\\Biskra_nadifa\\storedimages\\";
 
     @Autowired
     public citizenAPi ( reportServiceImp reportServiceImp1,
                         reportsRepository reportsrepository,
                         suggestionService suggestionservice,
-                        modernBinServiceImp modernBinServiceImp){
+                        modernBinServiceImp modernBinServiceImp,
+                        trashCollectionScheduleServiceImp trashcollectionScheduleservice ){
 
         this.reportServiceImp = reportServiceImp1 ;
         this.reportsrepository = reportsrepository;
         this.suggestionService = suggestionservice ;
         this.modernBinServiceImp = modernBinServiceImp;
+        this.trashcollectionScheduleservice = trashcollectionScheduleservice;
 
 
     }
@@ -75,10 +79,10 @@ public class citizenAPi {
     }
 
 
-    @PostMapping("/suggestion")
-    public String createReport(@RequestBody sugesstion suggestioninput){
+    @PostMapping("/suggestion/{citizenId}")
+    public String createReport(@PathVariable int citizenId ,@RequestBody sugesstion suggestioninput){
 
-        suggestionService.createSugesstion(suggestioninput);
+        suggestionService.createSugesstion(citizenId,suggestioninput);
 
         return "Suggestion saved succesffully " ;
 
@@ -118,6 +122,10 @@ public class citizenAPi {
         return modernBinServiceImp.getAllBin() ;
     }
 
+    @GetMapping("/trashcollectionSchedule")
+    public List<trashCollectionSchedule> getAlltrashcollectionSchedule(){
 
+        return trashcollectionScheduleservice.getAllSchedule() ;
+    }
 
 }

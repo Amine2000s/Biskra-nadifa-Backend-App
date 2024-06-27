@@ -2,7 +2,11 @@ package com.chabiamin.restapidatabase.controller;
 
 import com.chabiamin.restapidatabase.model.*;
 import com.chabiamin.restapidatabase.service.dashboardServiceImp;
+import com.chabiamin.restapidatabase.service.modernBinServiceImp;
 import com.chabiamin.restapidatabase.service.reportServiceImp;
+import com.chabiamin.restapidatabase.service.trashCollectionScheduleServiceImp;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Driver;
@@ -15,15 +19,26 @@ import java.util.Optional;
 @RequestMapping("/dashboard")
 public class dashboardApi {
 
+
     reportServiceImp reportServiceImp ;
 
 
     dashboardServiceImp dashboardserviceimp;
 
-    public dashboardApi(reportServiceImp reportServiceImp1, dashboardServiceImp dashboardserviceimp){
+
+    com.chabiamin.restapidatabase.service.modernBinServiceImp modernBinServiceImp;
+
+    trashCollectionScheduleServiceImp trashcollectionscheduleserviceImp ;
+
+
+    public dashboardApi(reportServiceImp reportServiceImp1, dashboardServiceImp dashboardserviceimp,
+                        modernBinServiceImp modernBinServiceImp
+    ,trashCollectionScheduleServiceImp trashcollectionscheduleserviceImp) {
 
         this.reportServiceImp = reportServiceImp1 ;
         this.dashboardserviceimp = dashboardserviceimp ;
+        this.modernBinServiceImp = modernBinServiceImp ;
+        this.trashcollectionscheduleserviceImp = trashcollectionscheduleserviceImp;
     }
 
     @GetMapping("/drivers")
@@ -138,6 +153,20 @@ public class dashboardApi {
 
 
 
+    }
+
+    @GetMapping("/trashcollectionSchedule")
+    public List<trashCollectionSchedule> getAlltrashcollectionSchedule(){
+
+        return trashcollectionscheduleserviceImp.getAllSchedule() ;
+    }
+
+    @PostMapping("/trashcollectionSchedule/create")
+    public void addtrashcollectionSchedule(@RequestBody trashCollectionSchedule trashcollection){
+
+        trashcollectionscheduleserviceImp.addSchedule(trashcollection);
+
+        System.out.println("creation of timestamp");
     }
 
 }

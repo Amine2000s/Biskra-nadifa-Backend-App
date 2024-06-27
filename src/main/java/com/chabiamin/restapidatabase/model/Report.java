@@ -1,5 +1,6 @@
 package com.chabiamin.restapidatabase.model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Builder;
 import org.apache.commons.codec.binary.Base64InputStream;
@@ -20,27 +21,42 @@ public class Report {
     @Column(name="reporterID")
     int reporterId;
     @Column(name="report-type")
+    @Nullable
+
     String reportType;
     @Column(name = "report-description")
+    @Nullable
+
     String reportDescription;
     @Column(name="report-location")
+    @Nullable
     String reportLocation;
     @Column(name="report-longtitude")
+    @Nullable
+
     String reportlongtitude;
     @Column(name="report-latitude")
+    @Nullable
+
     String reportlatitude;
     @Column(name="report-picture")
+    @Nullable
+
     String image ;
     @Column(name="image-data")
+    @Nullable
+
     byte[] imagedata ;
 
     @Column(name="created-at")
-    java.time.LocalDateTime createdAt ;
+    @Nullable
+
+    String createdAt ;
 
     public Report() {
     }
 
-    public Report(int id, int reporterId, String reportType, String reportDescription, String reportLocation, String image,byte[] imagedata,java.time.LocalDateTime creatAt,String reportlongtitude , String reportlatitude ) {
+    public Report(int id, int reporterId, String reportType, String reportDescription, String reportLocation, String image,byte[] imagedata,String creatAt,String reportlongtitude , String reportlatitude ) {
         this.id = id;
         this.reporterId = reporterId;
         this.reportType = reportType;
@@ -110,7 +126,7 @@ public class Report {
         return imagedata;
     }
 
-    public LocalDateTime getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
@@ -131,7 +147,7 @@ public class Report {
         this.reportlatitude = reportlatitude;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 

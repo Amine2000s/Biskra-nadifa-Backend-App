@@ -91,7 +91,7 @@ public class dashboardServiceImp implements dashboardService{
             cleantask.setAssingerSystemUser(systemuser);
             cleantask.setAssigneddriver(driverr);
             cleantask.setCreatedAt(java.time.LocalDateTime.now());
-
+            cleantask.setStatus("not done");
             cleantaskrepository.save(cleantask);
 
             System.out.println("done with succes ");

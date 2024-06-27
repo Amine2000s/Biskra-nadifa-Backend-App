@@ -1,5 +1,6 @@
 package com.chabiamin.restapidatabase.model;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -17,12 +18,15 @@ public class sugesstion {
     private normalUser normalUser ;
 
     @Column(name="suggestion-title")
+            @Nullable
     String suggestionTitle;
     @Column(name="suggestion-description")
+            @Nullable
     String suggestionDescription;
 
     @Column(name="created-at")
-    java.time.LocalDateTime createdAt ;
+            @Nullable
+    String createdAt ;
 
     public sugesstion() {
     }
@@ -67,7 +71,7 @@ public class sugesstion {
         this.normalUser = normalUser;
     }
 
-    public LocalDateTime getCreatAt() {
+    public String getCreatAt() {
         return createdAt;
     }
 }
