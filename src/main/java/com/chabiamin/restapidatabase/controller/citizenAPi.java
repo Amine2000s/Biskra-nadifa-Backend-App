@@ -107,6 +107,7 @@ public class citizenAPi {
 
         if(report.getImagedata()==null){
             System.out.println("invoekd ! ");
+            System.out.println(report.getImagedata());
 
             throw new ReportImageNotUploadedException("Image Data not Uploaded");
 
@@ -117,7 +118,7 @@ public class citizenAPi {
             bis.close();
 
             // Save BufferedImage to file
-            File outputFile = new File(FOLDER_PATH + "\\" + report.getImage() + ".jpeg");
+            File outputFile = new File(FOLDER_PATH + "\\" + report.getImage() + "jpeg");
             ImageIO.write(image, "jpeg", outputFile);
 
             //System.out.println("Image saved successfully.");
