@@ -20,4 +20,13 @@ public class ReportExceptionHandler {
             return new ResponseEntity<>(reportException,HttpStatus.NOT_FOUND);
     }
 
+    @ExceptionHandler(value={ReportNotFoundException.class})
+    public ResponseEntity<Object> ReportNotFoundExceptionHandler(ReportNotFoundException reportNotFoundException){
+            ReportException reportException = new ReportException(reportNotFoundException.getMessage()
+                    ,reportNotFoundException.getCause(),
+                    HttpStatus.NOT_FOUND);
+
+            return new ResponseEntity<>(reportException,reportException.getHttpStatus());
+    }
+
 }

@@ -65,7 +65,13 @@ public class reportServiceImp implements  reportsService{
 
     @Override
     public Optional<Report> getReport(int reportID) {
-        return reportsrepository.findById(reportID);
+
+        if(reportsrepository.findById(reportID).isEmpty()){
+            return  null ;
+        }else {
+
+            return reportsrepository.findById(reportID);
+        }
     }
 
     @Override

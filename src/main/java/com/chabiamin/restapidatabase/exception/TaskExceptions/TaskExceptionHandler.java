@@ -14,10 +14,10 @@ public class TaskExceptionHandler {
 
         TaskException taskEX = new TaskException(taskNotFoundException.getMessage(),
                 taskNotFoundException.getCause(),
-                HttpStatus.BAD_REQUEST);
+                HttpStatus.NOT_FOUND);
 
 
-        return new ResponseEntity<>(taskEX,HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(taskEX,taskEX.getHttpStatus());
 
 
 

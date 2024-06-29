@@ -1,5 +1,6 @@
 package com.chabiamin.restapidatabase.controller;
 
+import com.chabiamin.restapidatabase.exception.ReportExceptions.ReportNotFoundException;
 import com.chabiamin.restapidatabase.exception.TaskExceptions.TaskNotFoundException;
 import com.chabiamin.restapidatabase.model.*;
 import com.chabiamin.restapidatabase.service.dashboardServiceImp;
@@ -60,11 +61,15 @@ public class dashboardApi {
     }
 
     @GetMapping("/reports/{reportId}")
-    public Report getReportByid(@PathVariable int reportId){
+    public Optional<Report> getReportByid(@PathVariable int reportId){
 
-        Optional<Report> report =  reportServiceImp.getReport(reportId);
+       if(reportServiceImp.getReport(reportId)==null){
 
-        return report.get() ;
+           throw new ReportNotFoundException("Report Not found");
+
+       }else{
+           return reportServiceImp.getReport(reportId);
+       }
     }
 
 
