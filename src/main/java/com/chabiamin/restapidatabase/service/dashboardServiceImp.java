@@ -6,6 +6,7 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Driver;
 import java.util.List;
 import java.util.Optional;
 
@@ -158,7 +159,25 @@ public class dashboardServiceImp implements dashboardService{
 
     }
 
+    public Optional<driver> getDriverById(int driverId){
+
+        if(driverrepository.findById(driverId).isEmpty()){
+            return  null;
+        }else{
+            return driverrepository.findById(driverId);
+        }
 
 
+    }
+    public Optional<Report> getReportById(int reportId){
+
+        if(reportsrepository.findById(reportId).isEmpty()){
+            return  null;
+        }else{
+            return reportsrepository.findById(reportId);
+        }
+
+
+    }
 
 }

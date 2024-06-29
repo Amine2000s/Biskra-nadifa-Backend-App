@@ -1,5 +1,6 @@
 package com.chabiamin.restapidatabase.controller;
 
+import com.chabiamin.restapidatabase.exception.DriverException.DriverNotFoundException;
 import com.chabiamin.restapidatabase.exception.ReportExceptions.ReportNotFoundException;
 import com.chabiamin.restapidatabase.exception.TaskExceptions.TaskNotFoundException;
 import com.chabiamin.restapidatabase.model.*;
@@ -7,6 +8,10 @@ import com.chabiamin.restapidatabase.service.dashboardServiceImp;
 import com.chabiamin.restapidatabase.service.modernBinServiceImp;
 import com.chabiamin.restapidatabase.service.reportServiceImp;
 import com.chabiamin.restapidatabase.service.trashCollectionScheduleServiceImp;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.ErrorResponse;
+import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -110,11 +115,19 @@ public class dashboardApi {
 
 
     @PutMapping("/assigntask/{reportId}/{assignerId}/{assignedId}")
-    public String createTask(@PathVariable("reportId") int reportId , @PathVariable("assignerId") int assignerId,@PathVariable("assignedId") int assignedId ){
+    public ResponseEntity<Object> createTask(@PathVariable("reportId") int reportId , @PathVariable("assignerId") int assignerId, @PathVariable("assignedId") int assignedId ){
 
+
+        if(dashboardserviceimp.getDriverById(assignedId)==null){
+            throw  new DriverNotFoundException("Driver Not Found ") ;
+        }
+        if(dashboardserviceimp.getReportById(reportId)==null){
+           throw  new ReportNotFoundException("Report not Found");
+        }
         dashboardserviceimp.CreateTask(reportId,assignerId,assignedId);
+
         System.out.println("helllo");
-        return "creation of task done with success " ;
+        return new ResponseEntity<>(new Object(),HttpStatus.CREATED) ;
     }
 
     @PatchMapping("tasks/{taskId}/modify-driver")
