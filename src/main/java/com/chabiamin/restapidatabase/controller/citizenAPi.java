@@ -1,7 +1,7 @@
 package com.chabiamin.restapidatabase.controller;
 
 
-import com.chabiamin.restapidatabase.exception.ReportImageNotUploadedException;
+import com.chabiamin.restapidatabase.exception.ReportExceptions.ReportImageNotUploadedException;
 import com.chabiamin.restapidatabase.model.Report;
 import com.chabiamin.restapidatabase.model.modernBin;
 import com.chabiamin.restapidatabase.model.sugesstion;
@@ -11,7 +11,6 @@ import com.chabiamin.restapidatabase.service.*;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,9 +19,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.util.List;
-import java.util.concurrent.locks.ReentrantLock;
 
 @RestController
 @RequestMapping("/citizens")

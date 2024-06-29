@@ -4,7 +4,6 @@ import com.chabiamin.restapidatabase.model.*;
 import com.chabiamin.restapidatabase.repository.*;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -69,11 +68,12 @@ public class dashboardServiceImp implements dashboardService{
     }
 
 
-    public cleanTask getTaskbyID(int id) {
+    public Optional<cleanTask> getTaskbyID(int id) {
 
-        return cleantaskrepository.findById(id)
-                .orElseThrow(()-> new EntityNotFoundException("clean task not found with id " + id ));
+        if(cleantaskrepository.findById(id).isEmpty()) return null ;
 
+
+        return cleantaskrepository.findById(id);
     }
 
     public void CreateTask(int reportid , int assignerid , int assignedid) {

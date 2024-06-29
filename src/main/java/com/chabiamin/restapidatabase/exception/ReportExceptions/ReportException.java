@@ -1,4 +1,4 @@
-package com.chabiamin.restapidatabase.exception;
+package com.chabiamin.restapidatabase.exception.ReportExceptions;
 
 import org.springframework.http.HttpStatus;
 

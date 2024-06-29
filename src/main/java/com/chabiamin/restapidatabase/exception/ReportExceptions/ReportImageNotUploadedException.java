@@ -1,4 +1,4 @@
-package com.chabiamin.restapidatabase.exception;
+package com.chabiamin.restapidatabase.exception.ReportExceptions;
 
 public class ReportImageNotUploadedException extends RuntimeException{
     public ReportImageNotUploadedException(String message) {

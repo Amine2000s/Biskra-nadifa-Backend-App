@@ -1,15 +1,13 @@
 package com.chabiamin.restapidatabase.controller;
 
+import com.chabiamin.restapidatabase.exception.TaskExceptions.TaskNotFoundException;
 import com.chabiamin.restapidatabase.model.*;
 import com.chabiamin.restapidatabase.service.dashboardServiceImp;
 import com.chabiamin.restapidatabase.service.modernBinServiceImp;
 import com.chabiamin.restapidatabase.service.reportServiceImp;
 import com.chabiamin.restapidatabase.service.trashCollectionScheduleServiceImp;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigurationPackage;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Driver;
 import java.util.List;
 import java.util.Optional;
 
@@ -93,10 +91,14 @@ public class dashboardApi {
     }
 
     @GetMapping("/tasks/{taskId}")
-    public cleanTask getTasksbyID(@PathVariable int taskId){
+    public Optional<cleanTask> getTasksbyID(@PathVariable int taskId){
 
+        if(dashboardserviceimp.getTaskbyID(taskId)==null){
+            throw new TaskNotFoundException("Task not found ");
+        }else{
+            return dashboardserviceimp.getTaskbyID(taskId) ;
 
-        return dashboardserviceimp.getTaskbyID(taskId) ;
+        }
     }
    // http://localhost:8083/dashboard/tasks/?reportId=2&assignerId=3&assignedId=4
 
