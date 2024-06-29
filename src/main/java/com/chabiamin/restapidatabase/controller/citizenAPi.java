@@ -1,6 +1,7 @@
 package com.chabiamin.restapidatabase.controller;
 
 
+import com.chabiamin.restapidatabase.exception.ReportImageNotUploadedException;
 import com.chabiamin.restapidatabase.model.Report;
 import com.chabiamin.restapidatabase.model.modernBin;
 import com.chabiamin.restapidatabase.model.sugesstion;
@@ -19,6 +20,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -102,20 +104,31 @@ public class citizenAPi {
 
         //System.out.println(report.toString());
         //String filepath=FOLDER_PATH+report.getImagedata();
-        ByteArrayInputStream bis = new ByteArrayInputStream(report.getImagedata());
-        BufferedImage image = ImageIO.read(bis);
-        bis.close();
 
-        // Save BufferedImage to file
-        File outputFile = new File(FOLDER_PATH+"\\"+report.getImage()+".jpeg");
-        ImageIO.write(image, "jpeg", outputFile);
+        if(report.getImagedata()==null){
+            System.out.println("invoekd ! ");
 
-        //System.out.println("Image saved successfully.");
-        reportServiceImp.createReport(report);
+            throw new ReportImageNotUploadedException("Image Data not Uploaded");
 
-        return "Upload Done With Success";
+        }else{
+
+            ByteArrayInputStream bis = new ByteArrayInputStream(report.getImagedata());
+            BufferedImage image = ImageIO.read(bis);
+            bis.close();
+
+            // Save BufferedImage to file
+            File outputFile = new File(FOLDER_PATH + "\\" + report.getImage() + ".jpeg");
+            ImageIO.write(image, "jpeg", outputFile);
+
+            //System.out.println("Image saved successfully.");
+            reportServiceImp.createReport(report);
+
+            return "Upload Done With Success";
+        }
+
 
     }
+
     @GetMapping("/bins")
     public List<modernBin> getAllbins(){
 
