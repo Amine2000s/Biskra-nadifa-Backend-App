@@ -2,22 +2,21 @@ package com.chabiamin.restapidatabase.service;
 
 import com.chabiamin.restapidatabase.model.Report;
 import com.chabiamin.restapidatabase.repository.reportsRepository;
-import com.chabiamin.restapidatabase.utils.imageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
 @Component
-public class reportServiceImp implements  reportsService{
+public class reportsServiceImp implements reportsService  {
 
     reportsRepository reportsrepository ;
-
     @Autowired
-    public reportServiceImp (reportsRepository reportsrepository){
+    public reportsServiceImp(reportsRepository reportsrepository){
 
         this.reportsrepository = reportsrepository;
 
@@ -38,8 +37,8 @@ public class reportServiceImp implements  reportsService{
 
     public void createReport(Report report,MultipartFile file) throws IOException {
 
-       //if(file!=null), MultipartFile file
-       // report.setImagedata(imageUtils.compressImage(file.getBytes()));
+        //if(file!=null), MultipartFile file
+        // report.setImagedata(imageUtils.compressImage(file.getBytes()));
         System.out.println("sql query inserted");
         reportsrepository.save(report);
 
@@ -47,12 +46,12 @@ public class reportServiceImp implements  reportsService{
 
     }
 
-    @Override
+@Override
     public int updateReport(Report report) {
         return 0;
     }
-
     @Override
+
     public int deleteReport(int reportID) {
 
         reportsrepository.deleteById(reportID);
@@ -62,8 +61,8 @@ public class reportServiceImp implements  reportsService{
 
         return 1;
     }
-
     @Override
+
     public Optional<Report> getReport(int reportID) {
 
         if(reportsrepository.findById(reportID).isEmpty()){
@@ -73,8 +72,8 @@ public class reportServiceImp implements  reportsService{
             return reportsrepository.findById(reportID);
         }
     }
-
     @Override
+
     public List<Report> getAllReports() {
 
 
@@ -98,4 +97,6 @@ public class reportServiceImp implements  reportsService{
     public String UploadImagedata(Report report){
         return  "";
     }
+
+
 }

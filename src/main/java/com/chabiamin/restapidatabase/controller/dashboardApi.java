@@ -6,12 +6,11 @@ import com.chabiamin.restapidatabase.exception.TaskExceptions.TaskNotFoundExcept
 import com.chabiamin.restapidatabase.model.*;
 import com.chabiamin.restapidatabase.service.dashboardServiceImp;
 import com.chabiamin.restapidatabase.service.modernBinServiceImp;
-import com.chabiamin.restapidatabase.service.reportServiceImp;
+import com.chabiamin.restapidatabase.service.reportsServiceImp;
 import com.chabiamin.restapidatabase.service.trashCollectionScheduleServiceImp;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.ErrorResponse;
-import org.springframework.web.ErrorResponseException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +23,7 @@ import java.util.Optional;
 public class dashboardApi {
 
 
-    reportServiceImp reportServiceImp ;
+    reportsServiceImp reportsServiceImp;
 
 
     dashboardServiceImp dashboardserviceimp;
@@ -34,12 +33,12 @@ public class dashboardApi {
 
     trashCollectionScheduleServiceImp trashcollectionscheduleserviceImp ;
 
-
-    public dashboardApi(reportServiceImp reportServiceImp1, dashboardServiceImp dashboardserviceimp,
+@Autowired
+    public dashboardApi(reportsServiceImp reportsServiceImp1, dashboardServiceImp dashboardserviceimp,
                         modernBinServiceImp modernBinServiceImp
-    ,trashCollectionScheduleServiceImp trashcollectionscheduleserviceImp) {
+    , trashCollectionScheduleServiceImp trashcollectionscheduleserviceImp) {
 
-        this.reportServiceImp = reportServiceImp1 ;
+        this.reportsServiceImp = reportsServiceImp1;
         this.dashboardserviceimp = dashboardserviceimp ;
         this.modernBinServiceImp = modernBinServiceImp ;
         this.trashcollectionscheduleserviceImp = trashcollectionscheduleserviceImp;
@@ -62,18 +61,18 @@ public class dashboardApi {
     @GetMapping("/reports")
     public List<Report> getAllReports(){
 
-        return  reportServiceImp.getAllReports();
+        return  reportsServiceImp.getAllReports();
     }
 
     @GetMapping("/reports/{reportId}")
     public Optional<Report> getReportByid(@PathVariable int reportId){
 
-       if(reportServiceImp.getReport(reportId)==null){
+       if(reportsServiceImp.getReport(reportId)==null){
 
            throw new ReportNotFoundException("Report Not found");
 
        }else{
-           return reportServiceImp.getReport(reportId);
+           return reportsServiceImp.getReport(reportId);
        }
     }
 
@@ -81,7 +80,7 @@ public class dashboardApi {
     @DeleteMapping("/report/{reportId}")
     public String deleteReportByid(@PathVariable int reportId){
 
-        reportServiceImp.deleteReport(reportId);
+        reportsServiceImp.deleteReport(reportId);
 
         System.out.println("Delete OPeration DOne with sucees ");
 

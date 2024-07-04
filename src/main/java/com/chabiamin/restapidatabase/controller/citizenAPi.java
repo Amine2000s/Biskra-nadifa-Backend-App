@@ -26,7 +26,7 @@ import java.util.List;
 public class citizenAPi {
 
     suggestionService suggestionService ;
-    reportServiceImp reportServiceImp ;
+    reportsServiceImp reportsServiceImp;
 
     reportsRepository reportsrepository ;
 
@@ -38,13 +38,13 @@ public class citizenAPi {
     public static final String FOLDER_PATH = "C:\\Users\\amin\\Desktop\\Biskra_nadifa\\storedimages\\";
 
     @Autowired
-    public citizenAPi ( reportServiceImp reportServiceImp1,
+    public citizenAPi ( reportsServiceImp reportsServiceImp1,
                         reportsRepository reportsrepository,
                         suggestionService suggestionservice,
                         modernBinServiceImp modernBinServiceImp,
                         trashCollectionScheduleServiceImp trashcollectionScheduleservice ){
 
-        this.reportServiceImp = reportServiceImp1 ;
+        this.reportsServiceImp = reportsServiceImp1;
         this.reportsrepository = reportsrepository;
         this.suggestionService = suggestionservice ;
         this.modernBinServiceImp = modernBinServiceImp;
@@ -61,7 +61,7 @@ public class citizenAPi {
         file.transferTo(new File(filepath));*/
         //reportsrepository.save(report);,file
        // , @RequestPart(value = "image",required = false
-        reportServiceImp.createReport(report,file);
+        reportsServiceImp.createReport(report,file);
 
      //   System.out.println(report.toString());
         System.out.println(report.toString());
@@ -119,7 +119,7 @@ public class citizenAPi {
             ImageIO.write(image, "jpeg", outputFile);
 
             //System.out.println("Image saved successfully.");
-            reportServiceImp.createReport(report);
+            reportsServiceImp.createReport(report);
 
             return "Upload Done With Success";
         }
