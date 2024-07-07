@@ -1,5 +1,6 @@
 package com.chabiamin.restapidatabase.service;
 
+
 import com.chabiamin.restapidatabase.model.Report;
 import com.chabiamin.restapidatabase.repository.reportsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,11 @@ public class reportsServiceImp implements reportsService  {
         this.reportsrepository = reportsrepository;
 
     }
+    @Override
+    public void addReport(Report report) throws IOException {
 
-    public void createReport(Report report) throws IOException {
-
-        //if(file!=null), MultipartFile file
-        // report.setImagedata(imageUtils.compressImage(file.getBytes()));
+        //TODO :
+        //replace Console Printing with logs ,
         System.out.println("sql query inserted");
 
         reportsrepository.save(report);
@@ -34,8 +35,9 @@ public class reportsServiceImp implements reportsService  {
 
     }
 
+    @Override
 
-    public void createReport(Report report,MultipartFile file) throws IOException {
+    public void addReport(Report report,MultipartFile file) throws IOException {
 
         //if(file!=null), MultipartFile file
         // report.setImagedata(imageUtils.compressImage(file.getBytes()));
@@ -46,10 +48,7 @@ public class reportsServiceImp implements reportsService  {
 
     }
 
-@Override
-    public int updateReport(Report report) {
-        return 0;
-    }
+
     @Override
 
     public int deleteReport(int reportID) {
@@ -72,6 +71,12 @@ public class reportsServiceImp implements reportsService  {
             return reportsrepository.findById(reportID);
         }
     }
+
+    @Override
+    public Optional<List<Report>> getReportsByUserId(int UserId) {
+        return Optional.empty();
+    }
+
     @Override
 
     public List<Report> getAllReports() {

@@ -25,7 +25,7 @@ import java.util.List;
 @RequestMapping("/citizens")
 public class citizenAPi {
 
-    suggestionService suggestionService ;
+    suggestionServiceImp suggestionService ;
     reportsServiceImp reportsServiceImp;
 
     reportsRepository reportsrepository ;
@@ -40,7 +40,7 @@ public class citizenAPi {
     @Autowired
     public citizenAPi ( reportsServiceImp reportsServiceImp1,
                         reportsRepository reportsrepository,
-                        suggestionService suggestionservice,
+                        suggestionServiceImp suggestionservice,
                         modernBinServiceImp modernBinServiceImp,
                         trashCollectionScheduleServiceImp trashcollectionScheduleservice ){
 
@@ -61,7 +61,7 @@ public class citizenAPi {
         file.transferTo(new File(filepath));*/
         //reportsrepository.save(report);,file
        // , @RequestPart(value = "image",required = false
-        reportsServiceImp.createReport(report,file);
+        reportsServiceImp.addReport(report,file);
 
      //   System.out.println(report.toString());
         System.out.println(report.toString());
@@ -119,7 +119,7 @@ public class citizenAPi {
             ImageIO.write(image, "jpeg", outputFile);
 
             //System.out.println("Image saved successfully.");
-            reportsServiceImp.createReport(report);
+            reportsServiceImp.addReport(report);
 
             return "Upload Done With Success";
         }

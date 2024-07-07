@@ -1,34 +1,18 @@
 package com.chabiamin.restapidatabase.service;
 
-import com.chabiamin.restapidatabase.model.normalUser;
 import com.chabiamin.restapidatabase.model.sugesstion;
-import com.chabiamin.restapidatabase.repository.normalUserRepository;
-import com.chabiamin.restapidatabase.repository.sugesstionsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import jdk.jshell.SourceCodeAnalysis;
 
-@Service
-public class suggestionService {
-
-    @Autowired
-    sugesstionsRepository sugesstionRepository;
+public interface suggestionService {
 
 
-    @Autowired
-    normalUserRepository normaluserRepository ;
+    public void createSugesstion(int citizenID,sugesstion sugesstion);
 
+    public void deleteSuggestionb(int suggestionid);
 
+    public void getUserSugesstionsbyId(int userId);
 
-    public void createSugesstion(int citizenID,sugesstion sugesstioninput){
-
-        normalUser user = normaluserRepository.getReferenceById(citizenID);
-        sugesstioninput.setNormalUser(user);
-
-        sugesstionRepository.save(sugesstioninput);
-
-    }
-
-
+    public void getSugesstion(int SuggestionId);
 
 
 }
