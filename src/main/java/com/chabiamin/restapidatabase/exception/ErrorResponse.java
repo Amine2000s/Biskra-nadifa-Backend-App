@@ -12,5 +12,10 @@ public class ErrorResponse {
 
     private int statusCode;
     private String message;
-
+    public ErrorResponse(String message,int statusCode)
+    {
+        super();
+        this.message = message;
+        this.statusCode = statusCode ;
+    }
 }
