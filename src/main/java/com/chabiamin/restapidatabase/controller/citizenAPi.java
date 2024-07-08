@@ -21,6 +21,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import static com.chabiamin.restapidatabase.service.reportsServiceImp.FOLDER_PATH;
+
 @RestController
 @RequestMapping("/citizens")
 public class citizenAPi {
@@ -36,8 +38,7 @@ public class citizenAPi {
     trashCollectionScheduleServiceImp trashcollectionScheduleservice ;
 
 
-    //this folder path is used to prove that the images are recieved Correcttly
-    public static final String FOLDER_PATH = "C:\\Users\\amin\\Desktop\\Biskra_nadifa\\storedimages\\";
+
 
     @Autowired
     public citizenAPi ( reportsServiceImp reportsServiceImp1,
@@ -76,24 +77,9 @@ public class citizenAPi {
         if(report.getImagedata()==null){
             throw new ReportImageNotUploadedException("Image Data not Uploaded");
         }else{
-
-
-
-            // this Process transfome the Base64 String to the actual jpeg image , it's used to verify the Image Correctness 
-            ByteArrayInputStream bis = new ByteArrayInputStream(report.getImagedata());
-            BufferedImage image = ImageIO.read(bis);
-            bis.close();
-
-            // Save BufferedImage to file
-            File outputFile = new File(FOLDER_PATH + "\\" + report.getImage() + "jpeg");
-            ImageIO.write(image, "jpeg", outputFile);
-
-
             reportsServiceImp.addReport(report);
-
             return "Upload Done With Success";
         }
-
 
     }
 

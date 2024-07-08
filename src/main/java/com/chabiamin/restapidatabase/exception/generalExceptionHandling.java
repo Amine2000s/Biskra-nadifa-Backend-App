@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class generalExceptionHandling {
 
     @ExceptionHandler(value = DriverNotFoundException.class)
-    public ResponseEntity<Object> handleDrivernotFound(DriverNotFoundException driverNotFoundException){
+    public ResponseEntity<Object> handleDrivernotFoundException(DriverNotFoundException driverNotFoundException){
         ErrorResponse errorResponse = new ErrorResponse(HttpStatus.NOT_FOUND.value(),driverNotFoundException.getMessage());
 
 
