@@ -16,7 +16,7 @@ public interface cleanTaskRepository extends JpaRepository<cleanTask, Integer> {
 
 
     @Query("select ct FROM cleanTask ct where ct.Assigneddriver=:driver")
-    List<cleanTask> findTasksByID(@Param("driver")driver driver);
+    List<cleanTask> findTasksByID(@Param("driver")int driverid);
 
 
     @Modifying

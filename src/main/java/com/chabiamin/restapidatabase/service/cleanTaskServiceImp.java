@@ -17,10 +17,10 @@ public class cleanTaskServiceImp {
         this.cleantaskRepository = cleantaskRepository;
     }
 
-    public List<cleanTask> getAllTasksbyDriverId(Optional<driver> Driver){
+    public List<cleanTask> getAllTasksbyDriverId(int driverId){
 
-        driver driver = Driver.get();
-        return cleantaskRepository.findTasksByID(driver);
+
+        return cleantaskRepository.findTasksByID(driverId);
 
 
     }

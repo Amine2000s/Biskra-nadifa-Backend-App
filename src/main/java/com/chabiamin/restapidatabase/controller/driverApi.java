@@ -14,19 +14,16 @@ public class driverApi {
 
     cleanTaskServiceImp cleanTaskServiceImp;
 
-    driverRepository driverrepository ;
 
     @Autowired
-    public driverApi(cleanTaskServiceImp cleanTaskServiceImp,
-                     driverRepository driverrepository) {
+    public driverApi(cleanTaskServiceImp cleanTaskServiceImp) {
         this.cleanTaskServiceImp = cleanTaskServiceImp;
-        this.driverrepository = driverrepository;
     }
 
     @GetMapping("/{driverId}/tasks")
     public List<cleanTask> getTasksByDriverId(@PathVariable int driverId){
 
-            return cleanTaskServiceImp.getAllTasksbyDriverId(driverrepository.findById(driverId));
+            return cleanTaskServiceImp.getAllTasksbyDriverId(driverId);
 
 
 

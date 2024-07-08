@@ -20,7 +20,7 @@ public class smsController {
     @GetMapping("/verification")
     public void sendSms(){
 
-        SmsRequest smsrequest = new SmsRequest("+21377157757","Hello ! Your verification message is 556633");
+        SmsRequest smsrequest = new SmsRequest("+21377157757","Hello ! Your Biskra nadifa verification message is 556633");
 
 
         verificationservice.SendSmsVerification(smsrequest);
