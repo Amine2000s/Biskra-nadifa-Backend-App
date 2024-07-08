@@ -1,37 +1,19 @@
 package com.chabiamin.restapidatabase.service;
 
 import com.chabiamin.restapidatabase.model.cleanTask;
-import com.chabiamin.restapidatabase.model.driver;
-import com.chabiamin.restapidatabase.repository.cleanTaskRepository;
-import org.springframework.stereotype.Service;
+import com.twilio.twiml.voice.Task;
 
 import java.util.List;
-import java.util.Optional;
 
-@Service
-public class cleanTaskService {
-
-        cleanTaskRepository cleantaskRepository ;
-
-    public cleanTaskService(cleanTaskRepository cleantaskRepository) {
-        this.cleantaskRepository = cleantaskRepository;
-    }
-
-    public List<cleanTask> getAllTasksbyDriverId(Optional<driver> Driver){
-
-        driver driver = Driver.get();
-        return cleantaskRepository.findTasksByID(driver);
-
-
-    }
-
-    public void updateTaskStatus(int taskId , String status){
-
-        cleantaskRepository.updateTaskStatus(status,taskId);
+public interface cleanTaskService {
 
 
 
-    }
+    public void createTask(int reportId,int systemUserId,int driverId);
 
+    public List<cleanTask> getAllTasks() ;
+    public cleanTask getTaskbyId(int taskid) ;
+
+    public List<cleanTask> getTasksByDriverId(int driverId) ;
 
 }

@@ -69,12 +69,12 @@ public class dashboardServiceImp implements dashboardService{
     }
 
 
-    public Optional<cleanTask> getTaskbyID(int id) {
+    public Optional<cleanTask> getTaskbyID(int taskId) {
 
-        if(cleantaskrepository.findById(id).isEmpty()) return null ;
+        if(cleantaskrepository.findById(taskId).isEmpty()) return null ;
 
 
-        return cleantaskrepository.findById(id);
+        return cleantaskrepository.findById(taskId);
     }
 
     public void CreateTask(int reportid , int assignerid , int assignedid) {

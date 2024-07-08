@@ -39,7 +39,7 @@ public class suggestionServiceImp implements suggestionService{
     }
 
     @Override
-    public void getUserSugesstionsbyId(int userId) {
+    public void getUserSugesstionsbyUserId(int userId) {
 
     }
 

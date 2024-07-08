@@ -10,7 +10,7 @@ public interface suggestionService {
 
     public void deleteSuggestionb(int suggestionid);
 
-    public void getUserSugesstionsbyId(int userId);
+    public void getUserSugesstionsbyUserId(int userId);
 
     public void getSugesstion(int SuggestionId);
 
