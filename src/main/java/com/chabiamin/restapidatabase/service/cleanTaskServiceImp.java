@@ -1,7 +1,6 @@
 package com.chabiamin.restapidatabase.service;
 
 import com.chabiamin.restapidatabase.model.cleanTask;
-import com.chabiamin.restapidatabase.model.driver;
 import com.chabiamin.restapidatabase.repository.cleanTaskRepository;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class cleanTaskServiceImp {
+public class cleanTaskServiceImp implements cleanTaskService{
 
         cleanTaskRepository cleantaskRepository ;
 
@@ -34,4 +33,26 @@ public class cleanTaskServiceImp {
     }
 
 
+    @Override
+    public void createTask(int reportId, int systemUserId, int driverId) {
+            /* implmented the task ctreation in the dashboardService*/
+    }
+
+    @Override
+    public List<cleanTask> getAllTasks() {
+        return cleantaskRepository.findAll();
+    }
+
+    @Override
+    public Optional<cleanTask> getTaskbyId(int taskid) {
+        if(cleantaskRepository.findById(taskid).isEmpty()) return null ;
+
+
+        return cleantaskRepository.findById(taskid);
+    }
+
+    @Override
+    public List<cleanTask> getTasksByDriverId(int driverId) {
+        return null;
+    }
 }

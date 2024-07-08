@@ -14,15 +14,12 @@ import java.util.Optional;
 
 public class dashboardServiceImp implements dashboardService{
 
-    driverRepository driverrepository ;
-    reportsRepository reportsrepository ;
-
+    driverServiceImp driverserviceImp ;
+    reportsServiceImp reportsserviceImp ;
     systemUserRepository systemuserrepository ;
-    sugesstionsRepository sugesstionsrepository;
     normalUserRepository normalUserRepository ;
     cleanTaskRepository cleantaskrepository ;
 
-    modernBinServiceImp modernbinserviceImp ;
 
     /**
      * now mazal
@@ -33,59 +30,37 @@ public class dashboardServiceImp implements dashboardService{
      */
 
     @Autowired
-    public dashboardServiceImp( driverRepository driverrepository , reportsRepository reportsrepository ,sugesstionsRepository sugesstionsrepository ,
+    public dashboardServiceImp( driverServiceImp driverserviceImp ,
+                                reportsServiceImp reportsserviceImp ,
+                                sugesstionsRepository sugesstionsrepository ,
                                 cleanTaskRepository cleantaskrepository,
                                 normalUserRepository normalUserRepository,
                                 systemUserRepository systemuserrepository,
                                 modernBinServiceImp modernbinserviceImp
 ) {
 
-        this.driverrepository=driverrepository;
-        this.reportsrepository=reportsrepository;
-        this.sugesstionsrepository = sugesstionsrepository;
+        this.driverserviceImp=driverserviceImp;
+        this.reportsserviceImp=reportsserviceImp;
         this.cleantaskrepository = cleantaskrepository ;
         this.normalUserRepository=normalUserRepository;
         this.systemuserrepository=systemuserrepository;
-        this.modernbinserviceImp = modernbinserviceImp;
     }
+
+
+
+
 
     @Override
-    public List<driver> getAllDrivers() {
 
-
-        return  driverrepository.findAll();
-    }
-
-    @Override
-    public List<Report> getAllReports() {
-        return reportsrepository.findAll();
-
-    }
-
-    @Override
-    public List<sugesstion> getAllSugesstions() {
-
-        return sugesstionsrepository.findAll();
-    }
-
-
-    public Optional<cleanTask> getTaskbyID(int taskId) {
-
-        if(cleantaskrepository.findById(taskId).isEmpty()) return null ;
-
-
-        return cleantaskrepository.findById(taskId);
-    }
-
-    public void CreateTask(int reportid , int assignerid , int assignedid) {
-            Report report = reportsrepository.findById(reportid)
+    public void CreateTask(int reportid , int systemUserId , int driverId) {
+            Report report = reportsserviceImp.getReport(reportid)
                     .orElseThrow(() -> new EntityNotFoundException("report not found with id: " + reportid));
 
-            systemUser systemuser = systemuserrepository.findById(assignerid)
-                    .orElseThrow(() -> new EntityNotFoundException("assigner did not found with id "+ assignedid));
+            systemUser systemuser = systemuserrepository.findById(systemUserId)
+                    .orElseThrow(() -> new EntityNotFoundException("assigner did not found with id "+ systemUserId));
 
-            driver driverr = driverrepository.findById(assignedid)
-                    .orElseThrow(() -> new EntityNotFoundException("Driver not found with id "+ assignedid));
+            driver driverr = driverserviceImp.getDriverById(driverId)
+                    .orElseThrow(() -> new EntityNotFoundException("Driver not found with id "+ driverId));
 
             cleanTask cleantask = new cleanTask();
             cleantask.setReport(report);
@@ -97,20 +72,21 @@ public class dashboardServiceImp implements dashboardService{
 
             System.out.println("done with succes ");
     }
+    @Override
 
-    public String changeassinedDriver(int id , int newassignedid){
+    public String changeassinedDriver(int id , int newDriverId){
 
         Optional<cleanTask> cleantask = cleantaskrepository.findById(id);
 
-        Optional<driver> driver1 = Optional.ofNullable(driverrepository.findById(newassignedid).
-                orElseThrow(() -> new EntityNotFoundException("Driver replacemnt  not found with id " + newassignedid)));;
+        Optional<driver> driver1 = Optional.ofNullable(driverserviceImp.getDriverById(newDriverId).
+                orElseThrow(() -> new EntityNotFoundException("Driver replacemnt  not found with id " + newDriverId)));;
 
         cleantask.get().setAssigneddriver(driver1.get());
 
         cleantaskrepository.save(cleantask.get());
 
 
-        return "update done with success new id is "+id + "or "+newassignedid ;
+        return "update done with success new id is "+id + "or "+newDriverId ;
 
 
     }
@@ -120,16 +96,10 @@ public class dashboardServiceImp implements dashboardService{
         return normalUserRepository.findAll();
     }
 
+
+
+
     @Override
-    public List<cleanTask> getAllTaskCleaning() {
-        return cleantaskrepository.findAll();
-    }
-
-
-    public void createDriver(driver driverobj){
-        driverrepository.save(driverobj);
-    }
-
     public List<systemUser> getAllSystemUsers(){
 
             System.out.println("system retrieve all ");
@@ -137,47 +107,6 @@ public class dashboardServiceImp implements dashboardService{
            return systemuserrepository.findAll();
     }
 
-    public List<modernBin> getAllBin() {
 
-
-
-        return modernbinserviceImp.getAllBin() ;
-    }
-
-    public void addBin(modernBin moderbin) {
-
-        modernbinserviceImp.addBin(moderbin);
-
-
-    }
-
-    public void deleteBin(int id) {
-
-        modernbinserviceImp.deleteBin(id);
-
-
-
-    }
-
-    public Optional<driver> getDriverById(int driverId){
-
-        if(driverrepository.findById(driverId).isEmpty()){
-            return  null;
-        }else{
-            return driverrepository.findById(driverId);
-        }
-
-
-    }
-    public Optional<Report> getReportById(int reportId){
-
-        if(reportsrepository.findById(reportId).isEmpty()){
-            return  null;
-        }else{
-            return reportsrepository.findById(reportId);
-        }
-
-
-    }
 
 }

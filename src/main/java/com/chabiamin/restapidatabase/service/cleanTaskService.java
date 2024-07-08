@@ -1,9 +1,9 @@
 package com.chabiamin.restapidatabase.service;
 
 import com.chabiamin.restapidatabase.model.cleanTask;
-import com.twilio.twiml.voice.Task;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface cleanTaskService {
 
@@ -12,7 +12,7 @@ public interface cleanTaskService {
     public void createTask(int reportId,int systemUserId,int driverId);
 
     public List<cleanTask> getAllTasks() ;
-    public cleanTask getTaskbyId(int taskid) ;
+    public Optional<cleanTask> getTaskbyId(int taskid) ;
 
     public List<cleanTask> getTasksByDriverId(int driverId) ;
 

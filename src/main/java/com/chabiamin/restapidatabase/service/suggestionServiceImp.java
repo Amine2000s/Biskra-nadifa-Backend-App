@@ -55,7 +55,7 @@ public class suggestionServiceImp implements suggestionService{
     }
 
     @Override
-    public List<sugesstion> getAllSugesstions(int SuggestionId) {
+    public List<sugesstion> getAllSugesstions() {
 
 
         List<sugesstion> suggestionList =  sugesstionRepository.findAll();

@@ -9,15 +9,11 @@ public interface dashboardService {
 
 
 
+    public void CreateTask(int reportid , int systemUserId , int driverId);
+    public String changeassinedDriver(int id , int newDriverId);
 
-    public List<driver> getAllDrivers();
-    public List<Report> getAllReports();
-    public List<sugesstion> getAllSugesstions();
-
-
-    public List<normalUser> getAllCitizens() ;
-
-    public List<cleanTask> getAllTaskCleaning();
+    public List<normalUser> getAllCitizens();
+    public List<systemUser> getAllSystemUsers();
 
 
 }

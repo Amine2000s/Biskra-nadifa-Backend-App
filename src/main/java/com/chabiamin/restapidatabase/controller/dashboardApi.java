@@ -4,10 +4,7 @@ import com.chabiamin.restapidatabase.exception.DriverException.DriverNotFoundExc
 import com.chabiamin.restapidatabase.exception.ReportExceptions.ReportNotFoundException;
 import com.chabiamin.restapidatabase.exception.TaskExceptions.TaskNotFoundException;
 import com.chabiamin.restapidatabase.model.*;
-import com.chabiamin.restapidatabase.service.dashboardServiceImp;
-import com.chabiamin.restapidatabase.service.modernBinServiceImp;
-import com.chabiamin.restapidatabase.service.reportsServiceImp;
-import com.chabiamin.restapidatabase.service.trashCollectionScheduleServiceImp;
+import com.chabiamin.restapidatabase.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,34 +24,43 @@ public class dashboardApi {
 
 
     dashboardServiceImp dashboardserviceimp;
+    cleanTaskServiceImp cleantaskserviceImp ;
+    suggestionServiceImp suggestionserviceimp;
+    driverServiceImp driverserviceimp;
 
-
-    com.chabiamin.restapidatabase.service.modernBinServiceImp modernBinServiceImp;
+    com.chabiamin.restapidatabase.service.modernBinServiceImp modernbinServiceimp;
 
     trashCollectionScheduleServiceImp trashcollectionscheduleserviceImp ;
 
 @Autowired
-    public dashboardApi(reportsServiceImp reportsServiceImp1, dashboardServiceImp dashboardserviceimp,
-                        modernBinServiceImp modernBinServiceImp
-    , trashCollectionScheduleServiceImp trashcollectionscheduleserviceImp) {
+    public dashboardApi(reportsServiceImp reportsServiceImp1,
+                        dashboardServiceImp dashboardserviceimp,
+                        modernBinServiceImp modernBinServiceImp,
+                        trashCollectionScheduleServiceImp trashcollectionscheduleserviceImp,
+                        driverServiceImp driverserviceimp,
+                        suggestionServiceImp suggestionserviceimp,
+                        cleanTaskServiceImp cleantaskserviceImp) {
 
         this.reportsServiceImp = reportsServiceImp1;
         this.dashboardserviceimp = dashboardserviceimp ;
-        this.modernBinServiceImp = modernBinServiceImp ;
+        this.modernbinServiceimp = modernBinServiceImp ;
         this.trashcollectionscheduleserviceImp = trashcollectionscheduleserviceImp;
+        this.driverserviceimp = driverserviceimp ;
+        this.suggestionserviceimp = suggestionserviceimp;
+        this.cleantaskserviceImp = cleantaskserviceImp ;
     }
 
     @GetMapping("/drivers")
     public List<driver> getAllDrivers(){
 
 
-        return dashboardserviceimp.getAllDrivers() ;
+        return driverserviceimp.getAllDrivers() ;
     }
 
     @PostMapping("driver/create")
     public String createDriver(@RequestBody driver driverobj){
 
-                dashboardserviceimp.createDriver(driverobj);
+                driverserviceimp.createDriver(driverobj);
 
         return "driver created with succes" ;
     }
@@ -90,22 +96,22 @@ public class dashboardApi {
     @GetMapping("/suggestions")
     public List<sugesstion> getAllSugesstion(){
 
-        return dashboardserviceimp.getAllSugesstions() ;
+        return suggestionserviceimp.getAllSugesstions() ;
     }
 
     @GetMapping("/tasks")
     public List<cleanTask> getAllCleaningTasks(){
 
-        return dashboardserviceimp.getAllTaskCleaning() ;
+        return cleantaskserviceImp.getAllTasks() ;
     }
 
     @GetMapping("/tasks/{taskId}")
     public Optional<cleanTask> getTasksbyID(@PathVariable int taskId){
 
-        if(dashboardserviceimp.getTaskbyID(taskId)==null){
+        if(cleantaskserviceImp.getTaskbyId(taskId)==null){
             throw new TaskNotFoundException("Task not found ");
         }else{
-            return dashboardserviceimp.getTaskbyID(taskId) ;
+            return cleantaskserviceImp.getTaskbyId(taskId) ;
 
         }
     }
@@ -117,10 +123,10 @@ public class dashboardApi {
     public ResponseEntity<Object> createTask(@PathVariable("reportId") int reportId , @PathVariable("assignerId") int assignerId, @PathVariable("assignedId") int assignedId ){
 
 
-        if(dashboardserviceimp.getDriverById(assignedId)==null){
+        if(driverserviceimp.getDriverById(assignedId)==null){
             throw  new DriverNotFoundException("Driver Not Found ") ;
         }
-        if(dashboardserviceimp.getReportById(reportId)==null){
+        if(reportsServiceImp.getReport(reportId)==null){
            throw  new ReportNotFoundException("Report not Found");
         }
         dashboardserviceimp.CreateTask(reportId,assignerId,assignedId);
@@ -154,13 +160,13 @@ public class dashboardApi {
     @GetMapping("/bins")
     public List<modernBin> getAllbins(){
 
-        return dashboardserviceimp.getAllBin() ;
+        return modernbinServiceimp.getAllBin() ;
     }
 
     @PostMapping("/bins/create")
     public void createBin(@RequestBody modernBin bin){
 
-        dashboardserviceimp.addBin(bin);
+        modernbinServiceimp.addBin(bin);
 
 
     }
@@ -168,7 +174,7 @@ public class dashboardApi {
     @DeleteMapping("bins/bin/{binid}")
     public void deleteBinbyID(@PathVariable int binid){
 
-        dashboardserviceimp.deleteBin(binid);
+        modernbinServiceimp.deleteBin(binid);
 
 
 

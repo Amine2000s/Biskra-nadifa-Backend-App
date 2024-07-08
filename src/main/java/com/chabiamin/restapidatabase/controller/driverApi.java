@@ -3,6 +3,7 @@ package com.chabiamin.restapidatabase.controller;
 import com.chabiamin.restapidatabase.model.cleanTask;
 import com.chabiamin.restapidatabase.repository.driverRepository;
 import com.chabiamin.restapidatabase.service.cleanTaskServiceImp;
+import com.chabiamin.restapidatabase.service.reportsServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +15,9 @@ public class driverApi {
 
     cleanTaskServiceImp cleanTaskServiceImp;
 
-
     @Autowired
-    public driverApi(cleanTaskServiceImp cleanTaskServiceImp) {
+    public driverApi(cleanTaskServiceImp cleanTaskServiceImp,
+                     reportsServiceImp reportsserviceimp) {
         this.cleanTaskServiceImp = cleanTaskServiceImp;
     }
 

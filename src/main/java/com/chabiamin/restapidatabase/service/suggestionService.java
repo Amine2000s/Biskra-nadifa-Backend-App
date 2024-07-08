@@ -14,7 +14,7 @@ public interface suggestionService {
 
     public void getUserSugesstionsbyUserId(int userId);
 
-    public List<sugesstion> getAllSugesstions(int SuggestionId);
+    public List<sugesstion> getAllSugesstions();
 
 
 }
