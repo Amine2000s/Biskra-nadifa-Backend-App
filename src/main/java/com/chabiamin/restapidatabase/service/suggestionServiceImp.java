@@ -7,6 +7,8 @@ import com.chabiamin.restapidatabase.repository.sugesstionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class suggestionServiceImp implements suggestionService{
 
@@ -17,6 +19,15 @@ public class suggestionServiceImp implements suggestionService{
     @Autowired
     normalUserRepository normaluserRepository ;
 
+
+
+    public suggestionServiceImp(sugesstionsRepository sgtrepository , normalUserRepository normaluserRepository){
+
+        this.sugesstionRepository = sgtrepository;
+        this.normaluserRepository = normaluserRepository ;
+
+
+    }
 
     /**
      * Currently the responsible api endpoint sends the suggestion object alongside with the user Id
@@ -44,7 +55,12 @@ public class suggestionServiceImp implements suggestionService{
     }
 
     @Override
-    public void getSugesstion(int SuggestionId) {
+    public List<sugesstion> getAllSugesstions(int SuggestionId) {
+
+
+        List<sugesstion> suggestionList =  sugesstionRepository.findAll();
+
+        return suggestionList ;
 
     }
 

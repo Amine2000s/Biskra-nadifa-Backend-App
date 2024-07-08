@@ -35,6 +35,8 @@ public class citizenAPi {
 
     trashCollectionScheduleServiceImp trashcollectionScheduleservice ;
 
+
+    //this folder path is used to prove that the images are recieved Correcttly
     public static final String FOLDER_PATH = "C:\\Users\\amin\\Desktop\\Biskra_nadifa\\storedimages\\";
 
     @Autowired
@@ -53,33 +55,11 @@ public class citizenAPi {
 
     }
 
-    @PostMapping(path = "/report",consumes ={"application/*","multipart/form-data","application/octet-stream",MediaType.APPLICATION_OCTET_STREAM_VALUE})
-    public String createReport(@RequestPart("report") Report report,@RequestPart("image")@Nullable MultipartFile file) throws IOException {
 
-        //String filepath=FOLDER_PATH+'report'.getImage();
-        /*String filepath=FOLDER_PATH+report.getImage()+".png";
-        file.transferTo(new File(filepath));*/
-        //reportsrepository.save(report);,file
-       // , @RequestPart(value = "image",required = false
-        reportsServiceImp.addReport(report,file);
-
-     //   System.out.println(report.toString());
-        System.out.println(report.toString());
-
-        if(file.getBytes()!=null){
-        return "report created successfully  " ;
-
-    }else{
-       //     System.out.println("nooooo image");
-        return "report created successfully  , image data is empty  " ;
-
-    }
-
-    }
 
 
     @PostMapping("/suggestion/{citizenId}")
-    public String createReport(@PathVariable int citizenId ,@RequestBody sugesstion suggestioninput){
+    public String createsuggestion(@PathVariable int citizenId ,@RequestBody sugesstion suggestioninput){
 
         suggestionService.createSugesstion(citizenId,suggestioninput);
 
@@ -87,29 +67,19 @@ public class citizenAPi {
 
     }
 
-    /*@PostMapping(value = "/testing")
-    public  String testing(@RequestBody Report report){
 
+    // The Client Send a Base64 String which represents the Image report
 
-            System.out.println(report.toString());
-       return "hello marouane habibi";
-
-    }*/
-    @PostMapping(value = "/uploadReport")
+    @PostMapping(value = "/Report")
     public  String uploadReport(@RequestBody Report report) throws IOException {
 
-
-        //System.out.println(report.toString());
-        //String filepath=FOLDER_PATH+report.getImagedata();
-
         if(report.getImagedata()==null){
-            System.out.println("invoekd ! ");
-            System.out.println(report.getImagedata());
-
             throw new ReportImageNotUploadedException("Image Data not Uploaded");
-
         }else{
 
+
+
+            // this Process transfome the Base64 String to the actual jpeg image , it's used to verify the Image Correctness 
             ByteArrayInputStream bis = new ByteArrayInputStream(report.getImagedata());
             BufferedImage image = ImageIO.read(bis);
             bis.close();
@@ -118,7 +88,7 @@ public class citizenAPi {
             File outputFile = new File(FOLDER_PATH + "\\" + report.getImage() + "jpeg");
             ImageIO.write(image, "jpeg", outputFile);
 
-            //System.out.println("Image saved successfully.");
+
             reportsServiceImp.addReport(report);
 
             return "Upload Done With Success";

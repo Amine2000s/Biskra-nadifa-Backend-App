@@ -3,6 +3,8 @@ package com.chabiamin.restapidatabase.service;
 import com.chabiamin.restapidatabase.model.sugesstion;
 import jdk.jshell.SourceCodeAnalysis;
 
+import java.util.List;
+
 public interface suggestionService {
 
 
@@ -12,7 +14,7 @@ public interface suggestionService {
 
     public void getUserSugesstionsbyUserId(int userId);
 
-    public void getSugesstion(int SuggestionId);
+    public List<sugesstion> getAllSugesstions(int SuggestionId);
 
 
 }
