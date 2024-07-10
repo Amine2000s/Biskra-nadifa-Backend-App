@@ -1,5 +1,6 @@
 package com.chabiamin.restapidatabase.service;
 
+import com.chabiamin.restapidatabase.exception.TaskExceptions.TaskNotFoundException;
 import com.chabiamin.restapidatabase.model.cleanTask;
 import com.chabiamin.restapidatabase.repository.cleanTaskRepository;
 import org.springframework.stereotype.Service;
@@ -44,11 +45,11 @@ public class cleanTaskServiceImp implements cleanTaskService{
     }
 
     @Override
-    public Optional<cleanTask> getTaskbyId(int taskid) {
-        if(cleantaskRepository.findById(taskid).isEmpty()) return null ;
+    public cleanTask getTaskbyId(int taskid) {
 
+         return  cleantaskRepository.findById(taskid).orElseThrow(()->
+                  new TaskNotFoundException("Task Not Found with Id" + taskid));
 
-        return cleantaskRepository.findById(taskid);
     }
 
     @Override

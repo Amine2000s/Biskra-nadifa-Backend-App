@@ -1,5 +1,6 @@
 package com.chabiamin.restapidatabase.service;
 
+import com.chabiamin.restapidatabase.exception.TaskExceptions.TaskNotFoundException;
 import com.chabiamin.restapidatabase.model.*;
 import com.chabiamin.restapidatabase.repository.*;
 import jakarta.persistence.EntityNotFoundException;
@@ -74,19 +75,21 @@ public class dashboardServiceImp implements dashboardService{
     }
     @Override
 
-    public String changeassinedDriver(int id , int newDriverId){
+    public String changeassinedDriver(int taskId , int newDriverId){
 
-        Optional<cleanTask> cleantask = cleantaskrepository.findById(id);
+        cleanTask cleantask = cleantaskrepository.findById(taskId).orElseThrow(
+                ()-> new TaskNotFoundException("the Task you are trying to find is not found with id "+taskId)
+        );
 
         Optional<driver> driver1 = Optional.ofNullable(driverserviceImp.getDriverById(newDriverId).
                 orElseThrow(() -> new EntityNotFoundException("Driver replacemnt  not found with id " + newDriverId)));;
 
-        cleantask.get().setAssigneddriver(driver1.get());
+        cleantask.setAssigneddriver(driver1.get());
 
-        cleantaskrepository.save(cleantask.get());
+        cleantaskrepository.save(cleantask);
 
 
-        return "update done with success new id is "+id + "or "+newDriverId ;
+        return "update done with success the Task id of  "+taskId + " is assigned to the driver with id  "+newDriverId ;
 
 
     }

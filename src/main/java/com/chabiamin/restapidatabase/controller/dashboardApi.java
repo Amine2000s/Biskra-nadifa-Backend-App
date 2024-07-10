@@ -88,7 +88,6 @@ public class dashboardApi {
 
         reportsServiceImp.deleteReport(reportId);
 
-        System.out.println("Delete OPeration DOne with sucees ");
 
         return "Delete OPeration DOne with sucees " ;
     }
@@ -106,14 +105,10 @@ public class dashboardApi {
     }
 
     @GetMapping("/tasks/{taskId}")
-    public Optional<cleanTask> getTasksbyID(@PathVariable int taskId){
+    public cleanTask getTasksbyID(@PathVariable int taskId){
 
-        if(cleantaskserviceImp.getTaskbyId(taskId)==null){
-            throw new TaskNotFoundException("Task not found ");
-        }else{
-            return cleantaskserviceImp.getTaskbyId(taskId) ;
+        return cleantaskserviceImp.getTaskbyId(taskId) ;
 
-        }
     }
    // http://localhost:8083/dashboard/tasks/?reportId=2&assignerId=3&assignedId=4
 

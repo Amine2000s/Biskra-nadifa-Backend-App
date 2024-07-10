@@ -76,9 +76,6 @@ public class reportsServiceImp implements reportsService  {
 
         reportsrepository.deleteById(reportID);
 
-
-        System.out.println(" hello from reportService imp");
-
         return 1;
     }
     @Override
