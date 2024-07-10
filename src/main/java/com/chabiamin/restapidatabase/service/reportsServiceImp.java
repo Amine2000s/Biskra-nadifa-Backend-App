@@ -1,19 +1,20 @@
 package com.chabiamin.restapidatabase.service;
- import com.chabiamin.restapidatabase.exception.ReportExceptions.ReportImageNotUploadedException;
- import com.chabiamin.restapidatabase.model.Report;
- import com.chabiamin.restapidatabase.repository.reportsRepository;
- import org.springframework.beans.factory.annotation.Autowired;
- import org.springframework.stereotype.Component;
- import org.springframework.web.multipart.MultipartFile;
+
+import com.chabiamin.restapidatabase.exception.ReportExceptions.ReportImageNotUploadedException;
+import com.chabiamin.restapidatabase.model.Report;
+import com.chabiamin.restapidatabase.repository.reportsRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 
- import javax.imageio.ImageIO;
- import java.awt.image.BufferedImage;
- import java.io.ByteArrayInputStream;
- import java.io.File;
- import java.io.IOException;
- import java.util.List;
- import java.util.Optional;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 
 
@@ -41,15 +42,15 @@ public class reportsServiceImp implements reportsService  {
         // this Process transfome the Base64 String to the actual jpeg image , it's used to verify the Image Correctness
 
         System.out.println("sql query inserted");
-            ByteArrayInputStream bis = new ByteArrayInputStream(report.getImagedata());
-            BufferedImage image = ImageIO.read(bis);
-            bis.close();
+        ByteArrayInputStream bis = new ByteArrayInputStream(report.getImagedata());
+        BufferedImage image = ImageIO.read(bis);
+        bis.close();
 
-            // Save BufferedImage to file
-            File outputFile = new File(FOLDER_PATH + "\\" + report.getImage() + "jpeg");
-            ImageIO.write(image, "jpeg", outputFile);
+        // Save BufferedImage to file
+        File outputFile = new File(FOLDER_PATH + "\\" + report.getImage() + "jpeg");
+        ImageIO.write(image, "jpeg", outputFile);
 
-            reportsrepository.save(report);
+        reportsrepository.save(report);
 
 
 
