@@ -18,8 +18,8 @@ public interface cleanTaskRepository extends JpaRepository<cleanTask, Integer> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE cleanTask ct set ct.status=:newStatus WHERE ct.id=:id")
-    void updateTaskStatus(@Param("newStatus")String status , @Param("id")int taskid);
+    @Query("UPDATE cleanTask ct set ct.status=:newStatus WHERE ct.id=:taskid")
+    void updateTaskStatus(@Param("newStatus")String status , @Param("taskid")int taskid);
 
 
 
