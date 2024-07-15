@@ -3,13 +3,11 @@ package com.chabiamin.restapidatabase.model;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Builder;
-import org.apache.commons.codec.binary.Base64InputStream;
 
-import javax.imageio.ImageIO;
-import java.time.LocalDateTime;
 import java.util.Arrays;
 
 @Entity
+@Builder
 @Table(name="report")
 //@Builder
 
@@ -56,17 +54,28 @@ public class Report {
     public Report() {
     }
 
-    public Report(int id, int reporterId, String reportType, String reportDescription, String reportLocation, String image,byte[] imagedata,String creatAt,String reportlongtitude , String reportlatitude ) {
+    public Report(int id, int reporterId, @Nullable String reportType,
+                  @Nullable String reportDescription, @Nullable String reportLocation,
+                  @Nullable String reportlongtitude, @Nullable String reportlatitude,
+                  @Nullable String image, @Nullable byte[] imagedata, @Nullable String createdAt) {
         this.id = id;
         this.reporterId = reporterId;
         this.reportType = reportType;
         this.reportDescription = reportDescription;
         this.reportLocation = reportLocation;
+        this.reportlongtitude = reportlongtitude;
+        this.reportlatitude = reportlatitude;
         this.image = image;
         this.imagedata = imagedata;
+        this.createdAt = createdAt;
+    }
+
+    public Report(String reportType, String reportDescription, String reportLocation, String image, String creatAt ) {
+        this.reportType = reportType;
+        this.reportDescription = reportDescription;
+        this.reportLocation = reportLocation;
+        this.image = image;
         this.createdAt = creatAt ;
-        this.reportlongtitude = reportlongtitude ;
-        this.reportlatitude = reportlatitude;
     }
 
     public int getId() {

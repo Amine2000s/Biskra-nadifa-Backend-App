@@ -14,7 +14,7 @@ public class cleanTask {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id ;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="assignedID")
     private driver Assigneddriver ;
 
@@ -38,12 +38,11 @@ public class cleanTask {
     public cleanTask() {
     }
 
-    public cleanTask(int reportid , int assinerid , int assignedid ) {
+    public cleanTask(Report report , systemUser systemuser , driver Driver ) {
 
-        /*this.report.setId(reportid);
-        this.AssingerSystemUser.setId(assinerid);
-        this.Assigneddriver.setId(assignedid);
-*/
+        this.setReport(report);
+        this.setAssingerSystemUser(systemuser);
+        this.setAssigneddriver(Driver);
 
     }
 

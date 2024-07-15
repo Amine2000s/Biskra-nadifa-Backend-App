@@ -2,9 +2,11 @@ package com.chabiamin.restapidatabase.model;
 
 import com.chabiamin.restapidatabase.utils.Gender;
 import jakarta.persistence.*;
+import lombok.Builder;
 
 import java.util.Date;
 @Entity
+@Builder
 @Table(name="system-user")
 public class systemUser {
 

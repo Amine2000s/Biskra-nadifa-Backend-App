@@ -2,6 +2,9 @@ package com.chabiamin.restapidatabase.model;
 
 import com.chabiamin.restapidatabase.utils.Gender;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,16 +13,21 @@ import java.util.List;
 import java.util.Set;
 
 @Entity
+@Builder
+@AllArgsConstructor
+ @NoArgsConstructor
 @Table(name="driver")
 public class driver {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id ;
-   /* @OneToMany(cascade = CascadeType.ALL)
+
+    @OneToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name="suggesterID")
      Set<cleanTask> tasks  ;
-*/
+
+
     @Column(name="name")
     String name ;
     @Column(name="surname")
@@ -38,10 +46,15 @@ public class driver {
     @Column(name="gender")
     String gender;
 
-    public driver() {
-    }
-
-    public driver(int id, String name, String surName, String phoneNumber, String hashedPassword, String status, String dateOfBirth, String gender) {
+    public driver(int id,
+                  String name,
+                  String surName,
+                  String phoneNumber,
+                  String hashedPassword,
+                  String status,
+                  String dateOfBirth,
+                  String plateNo,
+                  String gender) {
         this.id = id;
         this.name = name;
         this.surName = surName;
@@ -49,6 +62,7 @@ public class driver {
         this.hashedPassword = hashedPassword;
         this.status = status;
         this.dateOfBirth = dateOfBirth;
+        this.plateNumber = plateNo;
         this.gender = gender;
       //  this.tasks = tasks ;
     }
