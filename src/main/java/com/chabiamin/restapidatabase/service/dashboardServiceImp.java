@@ -1,5 +1,6 @@
 package com.chabiamin.restapidatabase.service;
 
+import com.chabiamin.restapidatabase.exception.DriverException.sameDriverException;
 import com.chabiamin.restapidatabase.exception.TaskExceptions.TaskNotFoundException;
 import com.chabiamin.restapidatabase.model.*;
 import com.chabiamin.restapidatabase.repository.*;
@@ -33,11 +34,9 @@ public class dashboardServiceImp implements dashboardService{
     @Autowired
     public dashboardServiceImp( driverServiceImp driverserviceImp ,
                                 reportsServiceImp reportsserviceImp ,
-                                sugesstionsRepository sugesstionsrepository ,
                                 cleanTaskRepository cleantaskrepository,
                                 normalUserRepository normalUserRepository,
-                                systemUserRepository systemuserrepository,
-                                modernBinServiceImp modernbinserviceImp
+                                systemUserRepository systemuserrepository
 ) {
 
         this.driverserviceImp=driverserviceImp;
@@ -53,25 +52,22 @@ public class dashboardServiceImp implements dashboardService{
 
     @Override
 
-    public void CreateTask(int reportid , int systemUserId , int driverId) {
+    public String CreateTask(int reportid , int systemUserId , int driverId) {
             Report report = reportsserviceImp.getReport(reportid)
                     .orElseThrow(() -> new EntityNotFoundException("report not found with id: " + reportid));
 
             systemUser systemuser = systemuserrepository.findById(systemUserId)
-                    .orElseThrow(() -> new EntityNotFoundException("assigner did not found with id "+ systemUserId));
+                    .orElseThrow(() -> new EntityNotFoundException("systemUser did not found with id: "+ systemUserId));
 
             driver driverr = driverserviceImp.getDriverById(driverId)
-                    .orElseThrow(() -> new EntityNotFoundException("Driver not found with id "+ driverId));
+                    .orElseThrow(() -> new EntityNotFoundException("Driver not found with id: "+ driverId));
 
-            cleanTask cleantask = new cleanTask();
-            cleantask.setReport(report);
-            cleantask.setAssingerSystemUser(systemuser);
-            cleantask.setAssigneddriver(driverr);
+            cleanTask cleantask = new cleanTask(report,systemuser,driverr);
             cleantask.setCreatedAt(java.time.LocalDateTime.now());
             cleantask.setStatus("not done");
             cleantaskrepository.save(cleantask);
 
-            System.out.println("done with succes ");
+           return  "task created with succes";
     }
     @Override
 
@@ -82,7 +78,12 @@ public class dashboardServiceImp implements dashboardService{
         );
 
         Optional<driver> driver1 = Optional.ofNullable(driverserviceImp.getDriverById(newDriverId).
-                orElseThrow(() -> new EntityNotFoundException("Driver replacemnt  not found with id " + newDriverId)));;
+                orElseThrow(() -> new EntityNotFoundException("Driver new Replacement is not found with id " + newDriverId)));;
+
+       if(driver1.get().getId()==cleantask.getAssigneddriver().getId()){
+                throw new sameDriverException("new Driver is the same Driver with the id "+ newDriverId);
+       }
+
 
         cleantask.setAssigneddriver(driver1.get());
 

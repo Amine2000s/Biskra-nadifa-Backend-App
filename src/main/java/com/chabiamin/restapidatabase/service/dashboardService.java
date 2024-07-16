@@ -9,7 +9,7 @@ public interface dashboardService {
 
 
 
-    public void CreateTask(int reportid , int systemUserId , int driverId);
+    public String CreateTask(int reportid , int systemUserId , int driverId);
     public String changeassinedDriver(int id , int newDriverId);
 
     public List<normalUser> getAllCitizens();

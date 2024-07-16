@@ -18,23 +18,21 @@ public class cleanTaskServiceImp implements cleanTaskService{
 
     public List<cleanTask> getTasksbyDriverId(int driverId){
 
-
         return cleantaskRepository.findTasksByID(driverId);
-
 
     }
 
-    public void updateTaskStatus(int taskId , String status){
+    public void updateTaskStatus(int taskId , String status) {
 
-        cleantaskRepository.updateTaskStatus(status,taskId);
-
-
+        cleantaskRepository.updateTaskStatus(status, taskId);
 
     }
 
     @Override
     public List<cleanTask> getAllTasks() {
+
         return cleantaskRepository.findAll();
+
     }
 
     @Override

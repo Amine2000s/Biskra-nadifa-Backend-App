@@ -58,7 +58,7 @@ public class cleanTask {
         this.id = id;
     }
 
-    public driver getAssigneddriver(Optional<driver> driver1) {
+    public driver getAssigneddriver() {
         return Assigneddriver;
     }
 
