@@ -20,7 +20,6 @@ public interface reportsService {
      * */
 
     public void addReport(Report report) throws IOException;
-    void addReport(Report report, MultipartFile file) throws IOException;
     public Optional<Report> getReport(int reportID);
     public Optional<List<Report>> getReportsByUserId(int UserId) ;
     public List<Report> getAllReports();

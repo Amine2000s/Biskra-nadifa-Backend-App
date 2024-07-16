@@ -58,20 +58,6 @@ public class reportsServiceImp implements reportsService  {
 
     @Override
 
-    public void addReport(Report report,MultipartFile file) throws IOException {
-
-        //if(file!=null), MultipartFile file
-        // report.setImagedata(imageUtils.compressImage(file.getBytes()));
-        System.out.println("sql query inserted");
-        reportsrepository.save(report);
-
-
-
-    }
-
-
-    @Override
-
     public int deleteReport(int reportID) {
 
         reportsrepository.deleteById(reportID);
@@ -89,7 +75,7 @@ public class reportsServiceImp implements reportsService  {
             return reportsrepository.findById(reportID);
         }
     }
-
+//implement this function
     @Override
     public Optional<List<Report>> getReportsByUserId(int UserId) {
         return Optional.empty();
@@ -102,14 +88,6 @@ public class reportsServiceImp implements reportsService  {
 
         List<Report> templist = reportsrepository.findAll();
 
-        for (Report report:templist) {
-
-            /*byte[] temp = report.getImagedata();
-            if(temp==null)continue;
-
-            report.setImagedata(imageUtils.decompressImage(temp));
-*/
-        }
 
         return templist;
     }
@@ -117,9 +95,6 @@ public class reportsServiceImp implements reportsService  {
 
 
 
-    public String UploadImagedata(Report report){
-        return  "";
-    }
 
 
 }

@@ -129,7 +129,7 @@ public class cleanTaskRepositoryTest {
         entityManager.clear();
 
         cleanTask updatedTask = cleantaskRepository.findById(cleantask.getId()).orElse(null);
-        
+
         assertThat(updatedTask.getStatus()).isEqualTo("Done");
 
     }

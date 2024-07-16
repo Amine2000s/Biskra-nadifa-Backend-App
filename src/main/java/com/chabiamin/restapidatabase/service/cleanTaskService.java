@@ -8,11 +8,10 @@ public interface cleanTaskService {
 
 
 
-    public void createTask(int reportId,int systemUserId,int driverId);
 
     public List<cleanTask> getAllTasks() ;
     public cleanTask getTaskbyId(int taskid) ;
 
-    public List<cleanTask> getTasksByDriverId(int driverId) ;
+    public List<cleanTask> getTasksbyDriverId(int driverId) ;
 
 }

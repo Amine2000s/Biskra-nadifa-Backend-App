@@ -1,7 +1,6 @@
 package com.chabiamin.restapidatabase.controller;
 
 import com.chabiamin.restapidatabase.model.cleanTask;
-import com.chabiamin.restapidatabase.repository.driverRepository;
 import com.chabiamin.restapidatabase.service.cleanTaskServiceImp;
 import com.chabiamin.restapidatabase.service.reportsServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class driverApi {
     @GetMapping("/{driverId}/tasks")
     public List<cleanTask> getTasksByDriverId(@PathVariable int driverId){
 
-            return cleanTaskServiceImp.getAllTasksbyDriverId(driverId);
+            return cleanTaskServiceImp.getTasksbyDriverId(driverId);
 
 
 
