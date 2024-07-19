@@ -1,6 +1,9 @@
 package com.chabiamin.restapidatabase.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.sql.Driver;
 import java.time.LocalDateTime;
@@ -8,6 +11,9 @@ import java.util.Optional;
 
 @Entity
 @Table(name="clean-task")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class cleanTask {
 
     @Id
@@ -34,9 +40,6 @@ public class cleanTask {
     @Column(name="finished-at")
     java.time.LocalDateTime finishedAt ;
 
-
-    public cleanTask() {
-    }
 
     public cleanTask(Report report , systemUser systemuser , driver Driver ) {
 

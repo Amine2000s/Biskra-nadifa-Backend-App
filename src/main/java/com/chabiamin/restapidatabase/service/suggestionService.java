@@ -8,7 +8,7 @@ import java.util.List;
 public interface suggestionService {
 
 
-    public void createSugesstion(int citizenID,sugesstion sugesstion);
+    public String createSugesstion(int citizenID,sugesstion sugesstion);
 
     public void deleteSuggestionb(int suggestionid);
 

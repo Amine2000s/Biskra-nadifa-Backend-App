@@ -36,7 +36,7 @@ public class reportsServiceImp implements reportsService  {
 
     }
     @Override
-    public void addReport(Report report) throws IOException {
+    public String addReport(Report report) throws IOException {
 
 
         // this Process transfome the Base64 String to the actual jpeg image , it's used to verify the Image Correctness
@@ -52,7 +52,7 @@ public class reportsServiceImp implements reportsService  {
 
         reportsrepository.save(report);
 
-
+        return "added with succes ";
 
     }
 
@@ -75,12 +75,6 @@ public class reportsServiceImp implements reportsService  {
             return reportsrepository.findById(reportID);
         }
     }
-//implement this function
-    @Override
-    public Optional<List<Report>> getReportsByUserId(int UserId) {
-        return Optional.empty();
-    }
-
     @Override
 
     public List<Report> getAllReports() {

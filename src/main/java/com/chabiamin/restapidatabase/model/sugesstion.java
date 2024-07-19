@@ -2,10 +2,16 @@ package com.chabiamin.restapidatabase.model;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="suggestion")
 public class sugesstion {
 
@@ -28,11 +34,9 @@ public class sugesstion {
             @Nullable
     String createdAt ;
 
-    public sugesstion() {
-    }
-
-    public sugesstion(int id, String suggestionTitle, String suggestionDescription) {
+    public sugesstion(int id, normalUser user,String suggestionTitle, String suggestionDescription) {
         this.id = id;
+        this.normalUser = user ;
         this.suggestionTitle = suggestionTitle;
         this.suggestionDescription = suggestionDescription;
     }

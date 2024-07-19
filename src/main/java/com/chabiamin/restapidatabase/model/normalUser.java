@@ -2,10 +2,16 @@ package com.chabiamin.restapidatabase.model;
 
 import com.chabiamin.restapidatabase.utils.Gender;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 @Entity
 @Table(name="normal-user")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 
 public class normalUser {
 
@@ -26,20 +32,6 @@ public class normalUser {
     @Column(name="gender")
     String gender;
 
-
-
-
-    public normalUser() {
-    }
-
-    public normalUser(int id, String name, String surName, String phoneNumber, java.time.LocalDate dateOfBirth, String gender) {
-        this.id = id;
-        this.name = name;
-        this.surName = surName;
-        this.phoneNumber = phoneNumber;
-        this.dateOfBirth = dateOfBirth;
-        this.gender = gender;
-    }
 
     public int getId() {
         return id;

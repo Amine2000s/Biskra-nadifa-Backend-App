@@ -35,12 +35,14 @@ public class suggestionServiceImp implements suggestionService{
      * */
 
     @Override
-    public void createSugesstion(int citizenID,sugesstion sugesstion){
+    public String createSugesstion(int citizenID,sugesstion sugesstion){
 
         normalUser user = normaluserRepository.getReferenceById(citizenID);
         sugesstion.setNormalUser(user);
 
         sugesstionRepository.save(sugesstion);
+
+        return "Suggestion created With success" ;
 
     }
 

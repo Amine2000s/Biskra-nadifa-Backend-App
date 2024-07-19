@@ -10,7 +10,10 @@ import com.chabiamin.restapidatabase.repository.reportsRepository;
 import com.chabiamin.restapidatabase.service.*;
 import jakarta.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -60,11 +63,11 @@ public class citizenAPi {
 
 
     @PostMapping("/suggestion/{citizenId}")
-    public String createsuggestion(@PathVariable int citizenId ,@RequestBody sugesstion suggestioninput){
+    public ResponseEntity<String> createsuggestion(@PathVariable int citizenId , @RequestBody sugesstion suggestioninput){
 
         suggestionService.createSugesstion(citizenId,suggestioninput);
 
-        return "Suggestion saved succesffully " ;
+        return new ResponseEntity<>("Suggestion saved succesffully ", HttpStatus.CREATED) ;
 
     }
 
@@ -72,13 +75,13 @@ public class citizenAPi {
     // The Client Send a Base64 String which represents the Image report
 
     @PostMapping(value = "/Report")
-    public  String uploadReport(@RequestBody Report report) throws IOException {
+    public ResponseEntity<String> uploadReport(@RequestBody Report report) throws IOException {
 
         if(report.getImagedata()==null){
             throw new ReportImageNotUploadedException("Image Data not Uploaded");
         }else{
             reportsServiceImp.addReport(report);
-            return "Upload Done With Success";
+            return new ResponseEntity<>("Upload Done With Success", HttpStatus.CREATED) ;
         }
 
     }

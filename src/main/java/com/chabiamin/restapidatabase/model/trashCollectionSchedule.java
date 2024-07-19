@@ -1,8 +1,12 @@
 package com.chabiamin.restapidatabase.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Builder
 @Table(name="trashCollectionSchedule")
 public class trashCollectionSchedule {
 

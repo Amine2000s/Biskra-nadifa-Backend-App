@@ -2,8 +2,13 @@ package com.chabiamin.restapidatabase.model;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Builder
+@AllArgsConstructor
 @Table(name="modernBin")
 public class modernBin {
 

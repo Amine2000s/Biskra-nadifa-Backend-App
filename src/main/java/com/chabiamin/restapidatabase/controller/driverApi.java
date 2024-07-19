@@ -12,6 +12,8 @@ import java.util.List;
 @RequestMapping("/drivers")
 public class driverApi {
 
+
+    @Autowired
     cleanTaskServiceImp cleanTaskServiceImp;
 
     @Autowired

@@ -19,9 +19,8 @@ public interface reportsService {
      * deleting Report
      * */
 
-    public void addReport(Report report) throws IOException;
+    public String addReport(Report report) throws IOException;
     public Optional<Report> getReport(int reportID);
-    public Optional<List<Report>> getReportsByUserId(int UserId) ;
     public List<Report> getAllReports();
 
 
