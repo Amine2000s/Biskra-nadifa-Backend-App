@@ -24,7 +24,7 @@ public class driverApi {
     }
 
     @GetMapping("/{driverId}/tasks")
-    public List<cleanTask> getTasksByDriverId(@PathVariable int driverId){
+    public List<cleanTask> get_Tasks_By_DriverId(@PathVariable int driverId){
 
             return cleanTaskServiceImp.getTasksbyDriverId(driverId);
 
@@ -32,7 +32,7 @@ public class driverApi {
 
     }
     @PatchMapping ("/{driverId}/{taskId}/update-task-status")
-    public ResponseEntity<String> UpdateTaskbyID(@PathVariable int taskId, @RequestParam String status){
+    public ResponseEntity<String> Update_TaskStatus_byId(@PathVariable int taskId, @RequestParam String status){
 
         cleanTaskServiceImp.updateTaskStatus(taskId,status);
 
