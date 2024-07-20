@@ -63,7 +63,7 @@ public class citizenAPi {
 
 
     @PostMapping("/suggestion/{citizenId}")
-    public ResponseEntity<String> createsuggestion(@PathVariable int citizenId , @RequestBody sugesstion suggestioninput){
+    public ResponseEntity<String> create_suggestion(@PathVariable int citizenId , @RequestBody sugesstion suggestioninput){
 
         suggestionService.createSugesstion(citizenId,suggestioninput);
 
@@ -75,7 +75,7 @@ public class citizenAPi {
     // The Client Send a Base64 String which represents the Image report
 
     @PostMapping(value = "/Report")
-    public ResponseEntity<String> uploadReport(@RequestBody Report report) throws IOException {
+    public ResponseEntity<String> upload_Report(@RequestBody Report report) throws IOException {
 
         if(report.getImagedata()==null){
             throw new ReportImageNotUploadedException("Image Data not Uploaded");
@@ -87,13 +87,13 @@ public class citizenAPi {
     }
 
     @GetMapping("/bins")
-    public List<modernBin> getAllbins(){
+    public List<modernBin> get_AllBins(){
 
         return modernBinServiceImp.getAllBin() ;
     }
 
     @GetMapping("/trashcollectionSchedule")
-    public List<trashCollectionSchedule> getAlltrashcollectionSchedule(){
+    public List<trashCollectionSchedule> get_All_TrashCollection_Schedule(){
 
         return trashcollectionScheduleservice.getAllSchedule() ;
     }
