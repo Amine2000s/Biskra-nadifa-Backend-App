@@ -52,27 +52,27 @@ public class dashboardApi {
     }
 
     @GetMapping("/drivers")
-    public List<driver> getAllDrivers(){
+    public List<driver> get_All_Drivers(){
 
 
         return driverserviceimp.getAllDrivers() ;
     }
 
     @PostMapping("driver/create")
-    public String createDriver(@RequestBody driver driverobj){
+    public String create_Driver(@RequestBody driver driverobj){
 
                 driverserviceimp.createDriver(driverobj);
 
         return "driver created with succes" ;
     }
     @GetMapping("/reports")
-    public List<Report> getAllReports(){
+    public List<Report> get_All_Reports(){
 
         return  reportsServiceImp.getAllReports();
     }
 
     @GetMapping("/reports/{reportId}")
-    public Optional<Report> getReportByid(@PathVariable int reportId){
+    public Optional<Report> get_Report_ById(@PathVariable int reportId){
 
        if(reportsServiceImp.getReport(reportId)==null){
 
@@ -85,7 +85,7 @@ public class dashboardApi {
 
 
     @DeleteMapping("/report/{reportId}")
-    public String deleteReportByid(@PathVariable int reportId){
+    public String delete_Report_Byid(@PathVariable int reportId){
 
         reportsServiceImp.deleteReport(reportId);
 
@@ -94,19 +94,19 @@ public class dashboardApi {
     }
 
     @GetMapping("/suggestions")
-    public List<sugesstion> getAllSugesstion(){
+    public List<sugesstion> get_All_Sugesstion(){
 
         return suggestionserviceimp.getAllSugesstions() ;
     }
 
     @GetMapping("/tasks")
-    public List<cleanTask> getAllCleaningTasks(){
+    public List<cleanTask> get_All_CleaningTasks(){
 
         return cleantaskserviceImp.getAllTasks() ;
     }
 
     @GetMapping("/tasks/{taskId}")
-    public cleanTask getTasksbyID(@PathVariable int taskId){
+    public cleanTask get_Tasks_byID(@PathVariable int taskId){
 
         return cleantaskserviceImp.getTaskbyId(taskId) ;
 
@@ -116,7 +116,7 @@ public class dashboardApi {
 
 
     @PutMapping(value="/assigntask/{reportId}/{systemUserId}/{driverId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> createTask(@PathVariable("reportId") int reportId , @PathVariable("systemUserId") int assignerId, @PathVariable("driverId") int assignedId ){
+    public ResponseEntity<Object> create_Task(@PathVariable("reportId") int reportId , @PathVariable("systemUserId") int assignerId, @PathVariable("driverId") int assignedId ){
 
 
         if(driverserviceimp.getDriverById(assignedId)==null){
@@ -140,26 +140,26 @@ public class dashboardApi {
 
 
     @GetMapping("/citizens")
-    public List<normalUser> get_AllCitizens(){
+    public List<normalUser> get_All_Citizens(){
 
         return dashboardserviceimp.getAllCitizens() ;
     }
 
     @GetMapping("/systemusers")
-    public List<systemUser> get_AllSystemusers(){
+    public List<systemUser> get_All_Systemusers(){
 
         return dashboardserviceimp.getAllSystemUsers() ;
     }
 
 
     @GetMapping("/bins")
-    public List<modernBin> getAllbins(){
+    public List<modernBin> get_All_bins(){
 
         return modernbinServiceimp.getAllBin() ;
     }
 
     @PostMapping("/bins/create")
-    public void createBin(@RequestBody modernBin bin){
+    public void create_Bin(@RequestBody modernBin bin){
 
         modernbinServiceimp.addBin(bin);
 
@@ -167,7 +167,7 @@ public class dashboardApi {
     }
 
     @DeleteMapping("bins/bin/{binid}")
-    public void deleteBinbyID(@PathVariable int binid){
+    public void delete_Bin_byID(@PathVariable int binid){
 
         modernbinServiceimp.deleteBin(binid);
 
@@ -176,13 +176,13 @@ public class dashboardApi {
     }
 
     @GetMapping("/trashcollectionSchedule")
-    public List<trashCollectionSchedule> getAlltrashcollectionSchedule(){
+    public List<trashCollectionSchedule> get_All_Trash_Collection_Schedule(){
 
         return trashcollectionscheduleserviceImp.getAllSchedule() ;
     }
 
     @PostMapping("/trashcollectionSchedule/create")
-    public void addtrashcollectionSchedule(@RequestBody trashCollectionSchedule trashcollection){
+    public void add_Trash_Collection_Schedule(@RequestBody trashCollectionSchedule trashcollection){
 
         trashcollectionscheduleserviceImp.addSchedule(trashcollection);
 
