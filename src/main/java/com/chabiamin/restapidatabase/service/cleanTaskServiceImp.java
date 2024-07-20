@@ -22,10 +22,11 @@ public class cleanTaskServiceImp implements cleanTaskService{
 
     }
 
-    public void updateTaskStatus(int taskId , String status) {
+    public String updateTaskStatus(int taskId , String status) {
 
         cleantaskRepository.updateTaskStatus(status, taskId);
 
+        return "Task Status Updated Successfully ";
     }
 
     @Override

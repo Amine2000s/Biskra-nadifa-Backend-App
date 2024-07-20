@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 @RunWith(SpringRunner.class)
@@ -41,10 +42,18 @@ class driverApiTest {
 
     @BeforeEach
     void setUp() {
+
+        task1 = cleanTask.builder()
+                .id(1)
+                .status("not done")
+                .build();
     }
 
     @AfterEach
     void tearDown() {
+
+        task1 = null ;
+        task2=null;
     }
 
     @Test
@@ -67,8 +76,7 @@ class driverApiTest {
 
         when(cleanTaskServiceImp.getTasksbyDriverId(1)).thenReturn( cleanTasklist);
 
-        ResultActions result = mockMvc.perform(get("/drivers/{driverId}/tasks",1)
-                .contentType(MediaType.APPLICATION_JSON))
+        ResultActions result = mockMvc.perform(get("/drivers/{driverId}/tasks",1))
                 .andDo(print());
 
         result.andExpect(status().is2xxSuccessful());
@@ -76,7 +84,14 @@ class driverApiTest {
     }
 
     @Test
-    void updateTaskbyID() {
+    void updateTaskbyID() throws Exception {
+
+
+        when(cleanTaskServiceImp.updateTaskStatus(1,"Done"))
+                .thenReturn("Task Status Updated Successfully");
+        this.mockMvc.perform(patch("/drivers/{driverId}/{taskId}/update-task-status",1,1)
+                        .param("status","DOOONE"))
+                        .andDo(print()).andExpect(status().isAccepted());
     }
 
 

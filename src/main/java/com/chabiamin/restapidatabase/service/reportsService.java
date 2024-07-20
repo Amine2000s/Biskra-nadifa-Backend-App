@@ -24,7 +24,7 @@ public interface reportsService {
     public List<Report> getAllReports();
 
 
-    public int deleteReport(int  reportID);
+    public String deleteReport(int  reportID);
 
 
 

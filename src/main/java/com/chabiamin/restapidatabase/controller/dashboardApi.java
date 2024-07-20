@@ -7,6 +7,7 @@ import com.chabiamin.restapidatabase.model.*;
 import com.chabiamin.restapidatabase.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -89,7 +90,7 @@ public class dashboardApi {
         reportsServiceImp.deleteReport(reportId);
 
 
-        return "Delete OPeration DOne with sucees " ;
+        return "Delete Operation Done with success " ;
     }
 
     @GetMapping("/suggestions")
@@ -114,8 +115,8 @@ public class dashboardApi {
 
 
 
-    @PutMapping("/assigntask/{reportId}/{assignerId}/{assignedId}")
-    public ResponseEntity<Object> createTask(@PathVariable("reportId") int reportId , @PathVariable("assignerId") int assignerId, @PathVariable("assignedId") int assignedId ){
+    @PutMapping(value="/assigntask/{reportId}/{systemUserId}/{driverId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Object> createTask(@PathVariable("reportId") int reportId , @PathVariable("systemUserId") int assignerId, @PathVariable("driverId") int assignedId ){
 
 
         if(driverserviceimp.getDriverById(assignedId)==null){
@@ -130,22 +131,22 @@ public class dashboardApi {
     }
 
     @PatchMapping("tasks/{taskId}/modify-driver")
-    public String UpdateAssinedDriver(@PathVariable("taskId") int taskId ,@RequestParam(name="assignedid") int assignedid ){
+    public String Update_Assigned_Driver(@PathVariable("taskId") int taskId ,@RequestParam(name="driverId") int driverId ){
 
-        dashboardserviceimp.changeassinedDriver(taskId,assignedid);
+        dashboardserviceimp.changeassinedDriver(taskId,driverId);
 
         return "update of driver task done with success " ;
     }
 
 
     @GetMapping("/citizens")
-    public List<normalUser> getAllCitizens(){
+    public List<normalUser> get_AllCitizens(){
 
         return dashboardserviceimp.getAllCitizens() ;
     }
 
     @GetMapping("/systemusers")
-    public List<systemUser> getAllSystemusers(){
+    public List<systemUser> get_AllSystemusers(){
 
         return dashboardserviceimp.getAllSystemUsers() ;
     }

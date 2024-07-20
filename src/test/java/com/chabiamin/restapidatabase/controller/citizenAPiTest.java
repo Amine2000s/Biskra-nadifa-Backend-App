@@ -73,6 +73,7 @@ class citizenAPiTest {
     com.chabiamin.restapidatabase.service.modernBinServiceImp modernBinServiceImp;
 
     @MockBean
+
     trashCollectionScheduleServiceImp trashcollectionScheduleservice ;
 
      Report report1 ;
@@ -95,7 +96,7 @@ class citizenAPiTest {
 
 
  @Test
-    void createsuggestionTest_onSuccess() throws Exception {
+    void create_suggestion_Test_onSuccess() throws Exception {
 
 
 
@@ -120,7 +121,7 @@ class citizenAPiTest {
     }
 
     @Test
-    void uploadReporttest_onSucess() throws Exception {
+    void upload_Report_test_onSucess() throws Exception {
 
         report1 = Report.builder()
                 .id(2)
@@ -135,7 +136,7 @@ class citizenAPiTest {
 
 
        when(reportsServiceImp.addReport(report1)).thenReturn("added with succes ");
-        ResultActions result = mockMvc.perform(post("/citizens/Report",1)
+        ResultActions result = mockMvc.perform(post("/citizens/Report")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(reportJson))
                 .andDo(print());
@@ -147,7 +148,7 @@ class citizenAPiTest {
 
 
    @Test
-   void uploadReporttest_onImageDataException() throws Exception {
+   void upload_Report_test_on_ImageDataException() throws Exception {
 
        report1 = Report.builder()
                .id(2)
@@ -200,7 +201,7 @@ class citizenAPiTest {
     }
 
     @Test
-    void getAlltrashcollectionSchedule() throws Exception {
+    void get_All_trash_collection_Schedule() throws Exception {
 
         day1 = trashCollectionSchedule.builder()
                 .id(1)

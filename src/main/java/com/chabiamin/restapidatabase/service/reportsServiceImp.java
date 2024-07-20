@@ -5,6 +5,7 @@ import com.chabiamin.restapidatabase.model.Report;
 import com.chabiamin.restapidatabase.repository.reportsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 
@@ -19,7 +20,7 @@ import java.util.Optional;
 
 
 
-@Component
+@Service
 public class reportsServiceImp implements reportsService  {
 
 
@@ -58,11 +59,11 @@ public class reportsServiceImp implements reportsService  {
 
     @Override
 
-    public int deleteReport(int reportID) {
+    public String deleteReport(int reportID) {
 
         reportsrepository.deleteById(reportID);
 
-        return 1;
+        return "Delete Done with Success ";
     }
     @Override
 

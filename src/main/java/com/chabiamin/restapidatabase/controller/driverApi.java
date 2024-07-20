@@ -4,6 +4,8 @@ import com.chabiamin.restapidatabase.model.cleanTask;
 import com.chabiamin.restapidatabase.service.cleanTaskServiceImp;
 import com.chabiamin.restapidatabase.service.reportsServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +19,7 @@ public class driverApi {
     cleanTaskServiceImp cleanTaskServiceImp;
 
     @Autowired
-    public driverApi(cleanTaskServiceImp cleanTaskServiceImp,
-                     reportsServiceImp reportsserviceimp) {
+    public driverApi(cleanTaskServiceImp cleanTaskServiceImp) {
         this.cleanTaskServiceImp = cleanTaskServiceImp;
     }
 
@@ -31,11 +32,11 @@ public class driverApi {
 
     }
     @PatchMapping ("/{driverId}/{taskId}/update-task-status")
-    public String UpdateTaskbyID(@PathVariable int taskId,@RequestParam String status){
+    public ResponseEntity<String> UpdateTaskbyID(@PathVariable int taskId, @RequestParam String status){
 
         cleanTaskServiceImp.updateTaskStatus(taskId,status);
 
-        return "task update status operation done with success";
+        return new ResponseEntity<>("task update status operation done with success", HttpStatus.ACCEPTED);
 
     }
 }

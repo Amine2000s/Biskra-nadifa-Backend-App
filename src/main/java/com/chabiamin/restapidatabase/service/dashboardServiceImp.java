@@ -56,6 +56,7 @@ public class dashboardServiceImp implements dashboardService{
             Report report = reportsserviceImp.getReport(reportid)
                     .orElseThrow(() -> new EntityNotFoundException("report not found with id: " + reportid));
 
+            // a case that won't happen in real time
             systemUser systemuser = systemuserrepository.findById(systemUserId)
                     .orElseThrow(() -> new EntityNotFoundException("systemUser did not found with id: "+ systemUserId));
 
@@ -67,7 +68,7 @@ public class dashboardServiceImp implements dashboardService{
             cleantask.setStatus("not done");
             cleantaskrepository.save(cleantask);
 
-           return  "task created with succes";
+           return  "task created with success";
     }
     @Override
 
