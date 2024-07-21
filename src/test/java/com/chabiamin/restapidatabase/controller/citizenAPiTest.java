@@ -3,29 +3,15 @@ package com.chabiamin.restapidatabase.controller;
 import com.chabiamin.restapidatabase.model.*;
 import com.chabiamin.restapidatabase.repository.normalUserRepository;
 import com.chabiamin.restapidatabase.repository.reportsRepository;
-import com.chabiamin.restapidatabase.service.modernBinServiceImp;
-import com.chabiamin.restapidatabase.service.reportsServiceImp;
 import com.chabiamin.restapidatabase.service.suggestionServiceImp;
 import com.chabiamin.restapidatabase.service.trashCollectionScheduleServiceImp;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
 import com.google.gson.Gson;
-import org.json.JSONObject;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatchers;
-import org.mockito.Mock;
-import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.json.GsonTester;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -34,18 +20,11 @@ import java.util.*;
 
 
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
-import javax.net.ssl.SSLEngineResult;
-
-import static org.hamcrest.Matchers.any;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -107,7 +86,7 @@ class citizenAPiTest {
              + "}";
 
 
-     when(suggestionServiceimp.createSugesstion(1,suggestion))
+     when(suggestionServiceimp.create_Sugesstion(1,suggestion))
              .thenReturn("Suggestion created With success");
 
      ResultActions result = mockMvc.perform(post("/citizens/suggestion/{citizenID}",1)
@@ -135,7 +114,7 @@ class citizenAPiTest {
         String  reportJson = new Gson().toJson(report1);
 
 
-       when(reportsServiceImp.addReport(report1)).thenReturn("added with succes ");
+       when(reportsServiceImp.add_Report(report1)).thenReturn("added with succes ");
         ResultActions result = mockMvc.perform(post("/citizens/Report")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(reportJson))
@@ -162,7 +141,7 @@ class citizenAPiTest {
        String  reportJson = new Gson().toJson(report1);
 
 
-           when(reportsServiceImp.addReport(report1)).thenReturn("added with succes ");
+           when(reportsServiceImp.add_Report(report1)).thenReturn("added with succes ");
        ResultActions result = mockMvc.perform(post("/citizens/Report",1)
                        .contentType(MediaType.APPLICATION_JSON)
                        .content(reportJson))

@@ -7,7 +7,6 @@ import com.chabiamin.restapidatabase.model.cleanTask;
 import com.chabiamin.restapidatabase.model.driver;
 import com.chabiamin.restapidatabase.model.systemUser;
 import com.chabiamin.restapidatabase.repository.cleanTaskRepository;
-import com.chabiamin.restapidatabase.repository.normalUserRepository;
 import com.chabiamin.restapidatabase.repository.systemUserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.junit.jupiter.api.AfterEach;
@@ -15,7 +14,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.jupiter.MockitoSettings;
 
 import java.util.Optional;
 
@@ -102,11 +100,11 @@ class dashboardServiceImpTest {
         cleantask = new cleanTask(report,systemuser,Driver);
 
         when(cleantaskrepository.save(cleantask)).thenReturn(cleantask);
-        when(reportsserviceImp.getReport(report.getId())).thenReturn(Optional.ofNullable(report));
+        when(reportsserviceImp.get_Report(report.getId())).thenReturn(Optional.ofNullable(report));
         when(systemuserrepository.findById(systemuser.getId())).thenReturn(Optional.ofNullable(systemuser));
-        when(driverserviceImp.getDriverById(Driver.getId())).thenReturn(Optional.ofNullable(Driver));
+        when(driverserviceImp.get_Driver_ById(Driver.getId())).thenReturn(Optional.ofNullable(Driver));
 
-        assertThat(dashboardserviceImp.CreateTask(report.getId(), systemuser.getId(), Driver.getId())).isEqualTo("task created with succes");
+        assertThat(dashboardserviceImp.Create_Task(report.getId(), systemuser.getId(), Driver.getId())).isEqualTo("task created with succes");
 
 
 
@@ -127,12 +125,12 @@ class dashboardServiceImpTest {
         cleantask = new cleanTask(report,systemuser,Driver);
 
         when(cleantaskrepository.save(cleantask)).thenReturn(cleantask);
-        when(reportsserviceImp.getReport(report.getId())).thenReturn(Optional.ofNullable(report));
+        when(reportsserviceImp.get_Report(report.getId())).thenReturn(Optional.ofNullable(report));
         when(systemuserrepository.findById(systemuser.getId())).thenReturn(Optional.ofNullable(systemuser));
-        when(driverserviceImp.getDriverById(Driver.getId())).thenReturn(Optional.ofNullable(null));
+        when(driverserviceImp.get_Driver_ById(Driver.getId())).thenReturn(Optional.ofNullable(null));
 
         EntityNotFoundException EntityNotFoundException = assertThrows(EntityNotFoundException.class , ()->
-                dashboardserviceImp.CreateTask(report.getId(),systemuser.getId(),Driver.getId()));
+                dashboardserviceImp.Create_Task(report.getId(),systemuser.getId(),Driver.getId()));
 
         assertEquals("Driver not found with id: "+ Driver.getId(),EntityNotFoundException.getMessage());
 
@@ -154,12 +152,12 @@ class dashboardServiceImpTest {
         cleantask = new cleanTask(report,systemuser,Driver);
 
         when(cleantaskrepository.save(cleantask)).thenReturn(cleantask);
-        when(reportsserviceImp.getReport(report.getId())).thenReturn(Optional.ofNullable(null));
+        when(reportsserviceImp.get_Report(report.getId())).thenReturn(Optional.ofNullable(null));
         when(systemuserrepository.findById(systemuser.getId())).thenReturn(Optional.ofNullable(systemuser));
-        when(driverserviceImp.getDriverById(Driver.getId())).thenReturn(Optional.ofNullable(Driver));
+        when(driverserviceImp.get_Driver_ById(Driver.getId())).thenReturn(Optional.ofNullable(Driver));
 
         EntityNotFoundException EntityNotFoundException = assertThrows(EntityNotFoundException.class , ()->
-                dashboardserviceImp.CreateTask(report.getId(),systemuser.getId(),Driver.getId()));
+                dashboardserviceImp.Create_Task(report.getId(),systemuser.getId(),Driver.getId()));
 
         assertEquals("report not found with id: " + report.getId(),EntityNotFoundException.getMessage());
 
@@ -182,12 +180,12 @@ class dashboardServiceImpTest {
         cleantask = new cleanTask(report,systemuser,Driver);
 
         when(cleantaskrepository.save(cleantask)).thenReturn(cleantask);
-        when(reportsserviceImp.getReport(report.getId())).thenReturn(Optional.ofNullable(report));
+        when(reportsserviceImp.get_Report(report.getId())).thenReturn(Optional.ofNullable(report));
         when(systemuserrepository.findById(systemuser.getId())).thenReturn(Optional.ofNullable(null));
-        when(driverserviceImp.getDriverById(Driver.getId())).thenReturn(Optional.ofNullable(Driver));
+        when(driverserviceImp.get_Driver_ById(Driver.getId())).thenReturn(Optional.ofNullable(Driver));
 
         EntityNotFoundException EntityNotFoundException = assertThrows(EntityNotFoundException.class , ()->
-                dashboardserviceImp.CreateTask(report.getId(),systemuser.getId(),Driver.getId()));
+                dashboardserviceImp.Create_Task(report.getId(),systemuser.getId(),Driver.getId()));
 
         assertEquals("systemUser did not found with id: "+ systemuser.getId(),EntityNotFoundException.getMessage());
 
@@ -210,10 +208,10 @@ class dashboardServiceImpTest {
                 .build();
 
         when(cleantaskrepository.findById(cleantask.getId())).thenReturn(Optional.ofNullable(cleantask));
-        when(driverserviceImp.getDriverById(Driver1.getId())).thenReturn(Optional.ofNullable(Driver1));
+        when(driverserviceImp.get_Driver_ById(Driver1.getId())).thenReturn(Optional.ofNullable(Driver1));
 
 
-        assertThat(dashboardserviceImp.changeassinedDriver(cleantask.getId(),Driver1.getId())).
+        assertThat(dashboardserviceImp.change_assigned_Driver(cleantask.getId(),Driver1.getId())).
                 isEqualTo("update done with success the Task id of  "+cleantask.getId() + " is assigned to the driver with id  "+Driver1.getId());
 
 
@@ -230,10 +228,10 @@ class dashboardServiceImpTest {
 
 
         when(cleantaskrepository.findById(cleantask.getId())).thenReturn(Optional.ofNullable(null));
-        when(driverserviceImp.getDriverById(Driver.getId())).thenReturn(Optional.ofNullable(Driver));
+        when(driverserviceImp.get_Driver_ById(Driver.getId())).thenReturn(Optional.ofNullable(Driver));
 
         Exception exception = assertThrows(TaskNotFoundException.class , ()->
-                dashboardserviceImp.changeassinedDriver(cleantask.getId(),Driver.getId()));
+                dashboardserviceImp.change_assigned_Driver(cleantask.getId(),Driver.getId()));
         assertEquals("the Task you are trying to find is not found with id "
                 +cleantask.getId(),exception.getMessage());
 
@@ -250,10 +248,10 @@ class dashboardServiceImpTest {
 
 
         when(cleantaskrepository.findById(cleantask.getId())).thenReturn(Optional.ofNullable(cleantask));
-        when(driverserviceImp.getDriverById(Driver.getId())).thenReturn(Optional.ofNullable(null));
+        when(driverserviceImp.get_Driver_ById(Driver.getId())).thenReturn(Optional.ofNullable(null));
 
         Exception exception = assertThrows(EntityNotFoundException.class , ()->
-                dashboardserviceImp.changeassinedDriver(cleantask.getId(),Driver.getId()));
+                dashboardserviceImp.change_assigned_Driver(cleantask.getId(),Driver.getId()));
         assertEquals("Driver new Replacement is not found with id " + Driver.getId(),exception.getMessage());
 
 
@@ -269,10 +267,10 @@ class dashboardServiceImpTest {
 
 
         when(cleantaskrepository.findById(cleantask.getId())).thenReturn(Optional.ofNullable(cleantask));
-        when(driverserviceImp.getDriverById(Driver.getId())).thenReturn(Optional.ofNullable(Driver));
+        when(driverserviceImp.get_Driver_ById(Driver.getId())).thenReturn(Optional.ofNullable(Driver));
 
         Exception exception = assertThrows(sameDriverException.class , ()->
-                dashboardserviceImp.changeassinedDriver(cleantask.getId(),Driver.getId()));
+                dashboardserviceImp.change_assigned_Driver(cleantask.getId(),Driver.getId()));
         assertEquals("new Driver is the same Driver with the id "+ Driver.getId(),exception.getMessage());
 
 

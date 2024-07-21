@@ -12,13 +12,13 @@ public class driverServiceImp implements driverService{
     driverRepository driverrepository ;
 
     @Override
-    public List<driver> getAllDrivers() {
+    public List<driver> get_AllDrivers() {
 
 
         return  driverrepository.findAll();
     }
     @Override
-    public Optional<driver> getDriverById(int driverId){
+    public Optional<driver> get_Driver_ById(int driverId){
 
         if(driverrepository.findById(driverId).isEmpty()){
             return  null;

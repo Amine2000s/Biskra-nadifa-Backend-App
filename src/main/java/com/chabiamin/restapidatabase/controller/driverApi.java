@@ -26,7 +26,7 @@ public class driverApi {
     @GetMapping("/{driverId}/tasks")
     public List<cleanTask> get_Tasks_By_DriverId(@PathVariable int driverId){
 
-            return cleanTaskServiceImp.getTasksbyDriverId(driverId);
+            return cleanTaskServiceImp.get_Tasks_by_DriverId(driverId);
 
 
 

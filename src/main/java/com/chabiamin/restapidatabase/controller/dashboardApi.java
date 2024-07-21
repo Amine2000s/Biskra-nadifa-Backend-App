@@ -2,7 +2,6 @@ package com.chabiamin.restapidatabase.controller;
 
 import com.chabiamin.restapidatabase.exception.DriverException.DriverNotFoundException;
 import com.chabiamin.restapidatabase.exception.ReportExceptions.ReportNotFoundException;
-import com.chabiamin.restapidatabase.exception.TaskExceptions.TaskNotFoundException;
 import com.chabiamin.restapidatabase.model.*;
 import com.chabiamin.restapidatabase.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +54,7 @@ public class dashboardApi {
     public List<driver> get_All_Drivers(){
 
 
-        return driverserviceimp.getAllDrivers() ;
+        return driverserviceimp.get_AllDrivers() ;
     }
 
     @PostMapping("driver/create")
@@ -68,18 +67,18 @@ public class dashboardApi {
     @GetMapping("/reports")
     public List<Report> get_All_Reports(){
 
-        return  reportsServiceImp.getAllReports();
+        return  reportsServiceImp.get_AllReports();
     }
 
     @GetMapping("/reports/{reportId}")
     public Optional<Report> get_Report_ById(@PathVariable int reportId){
 
-       if(reportsServiceImp.getReport(reportId)==null){
+       if(reportsServiceImp.get_Report(reportId)==null){
 
            throw new ReportNotFoundException("Report Not found");
 
        }else{
-           return reportsServiceImp.getReport(reportId);
+           return reportsServiceImp.get_Report(reportId);
        }
     }
 
@@ -87,7 +86,7 @@ public class dashboardApi {
     @DeleteMapping("/report/{reportId}")
     public String delete_Report_Byid(@PathVariable int reportId){
 
-        reportsServiceImp.deleteReport(reportId);
+        reportsServiceImp.delete_Report(reportId);
 
 
         return "Delete Operation Done with success " ;
@@ -96,19 +95,19 @@ public class dashboardApi {
     @GetMapping("/suggestions")
     public List<sugesstion> get_All_Sugesstion(){
 
-        return suggestionserviceimp.getAllSugesstions() ;
+        return suggestionserviceimp.get_All_Sugesstions() ;
     }
 
     @GetMapping("/tasks")
     public List<cleanTask> get_All_CleaningTasks(){
 
-        return cleantaskserviceImp.getAllTasks() ;
+        return cleantaskserviceImp.get_AllTasks() ;
     }
 
     @GetMapping("/tasks/{taskId}")
     public cleanTask get_Tasks_byID(@PathVariable int taskId){
 
-        return cleantaskserviceImp.getTaskbyId(taskId) ;
+        return cleantaskserviceImp.get_Task_byId(taskId) ;
 
     }
    // http://localhost:8083/dashboard/tasks/?reportId=2&assignerId=3&assignedId=4
@@ -119,13 +118,13 @@ public class dashboardApi {
     public ResponseEntity<Object> create_Task(@PathVariable("reportId") int reportId , @PathVariable("systemUserId") int assignerId, @PathVariable("driverId") int assignedId ){
 
 
-        if(driverserviceimp.getDriverById(assignedId)==null){
+        if(driverserviceimp.get_Driver_ById(assignedId)==null){
             throw  new DriverNotFoundException("Driver Not Found ") ;
         }
-        if(reportsServiceImp.getReport(reportId)==null){
+        if(reportsServiceImp.get_Report(reportId)==null){
            throw  new ReportNotFoundException("Report not Found");
         }
-        dashboardserviceimp.CreateTask(reportId,assignerId,assignedId);
+        dashboardserviceimp.Create_Task(reportId,assignerId,assignedId);
 
         return new ResponseEntity<>(new Object(),HttpStatus.CREATED) ;
     }
@@ -133,7 +132,7 @@ public class dashboardApi {
     @PatchMapping("tasks/{taskId}/modify-driver")
     public String Update_Assigned_Driver(@PathVariable("taskId") int taskId ,@RequestParam(name="driverId") int driverId ){
 
-        dashboardserviceimp.changeassinedDriver(taskId,driverId);
+        dashboardserviceimp.change_assigned_Driver(taskId,driverId);
 
         return "update of driver task done with success " ;
     }
@@ -142,13 +141,13 @@ public class dashboardApi {
     @GetMapping("/citizens")
     public List<normalUser> get_All_Citizens(){
 
-        return dashboardserviceimp.getAllCitizens() ;
+        return dashboardserviceimp.get_All_Citizens() ;
     }
 
     @GetMapping("/systemusers")
     public List<systemUser> get_All_Systemusers(){
 
-        return dashboardserviceimp.getAllSystemUsers() ;
+        return dashboardserviceimp.get_All_SystemUsers() ;
     }
 
 

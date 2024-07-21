@@ -8,7 +8,6 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Driver;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,15 +51,15 @@ public class dashboardServiceImp implements dashboardService{
 
     @Override
 
-    public String CreateTask(int reportid , int systemUserId , int driverId) {
-            Report report = reportsserviceImp.getReport(reportid)
+    public String Create_Task(int reportid , int systemUserId , int driverId) {
+            Report report = reportsserviceImp.get_Report(reportid)
                     .orElseThrow(() -> new EntityNotFoundException("report not found with id: " + reportid));
 
             // a case that won't happen in real time
             systemUser systemuser = systemuserrepository.findById(systemUserId)
                     .orElseThrow(() -> new EntityNotFoundException("systemUser did not found with id: "+ systemUserId));
 
-            driver driverr = driverserviceImp.getDriverById(driverId)
+            driver driverr = driverserviceImp.get_Driver_ById(driverId)
                     .orElseThrow(() -> new EntityNotFoundException("Driver not found with id: "+ driverId));
 
             cleanTask cleantask = new cleanTask(report,systemuser,driverr);
@@ -72,13 +71,13 @@ public class dashboardServiceImp implements dashboardService{
     }
     @Override
 
-    public String changeassinedDriver(int taskId , int newDriverId){
+    public String change_assigned_Driver(int taskId , int newDriverId){
 
         cleanTask cleantask = cleantaskrepository.findById(taskId).orElseThrow(
                 ()-> new TaskNotFoundException("the Task you are trying to find is not found with id "+taskId)
         );
 
-        Optional<driver> driver1 = Optional.ofNullable(driverserviceImp.getDriverById(newDriverId).
+        Optional<driver> driver1 = Optional.ofNullable(driverserviceImp.get_Driver_ById(newDriverId).
                 orElseThrow(() -> new EntityNotFoundException("Driver new Replacement is not found with id " + newDriverId)));;
 
        if(driver1.get().getId()==cleantask.getAssigneddriver().getId()){
@@ -97,7 +96,7 @@ public class dashboardServiceImp implements dashboardService{
     }
 
     @Override
-    public List<normalUser> getAllCitizens() {
+    public List<normalUser> get_All_Citizens() {
         return normalUserRepository.findAll();
     }
 
@@ -105,7 +104,7 @@ public class dashboardServiceImp implements dashboardService{
 
 
     @Override
-    public List<systemUser> getAllSystemUsers(){
+    public List<systemUser> get_All_SystemUsers(){
 
             System.out.println("system retrieve all ");
 

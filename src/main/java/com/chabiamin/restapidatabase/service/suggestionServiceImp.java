@@ -35,7 +35,7 @@ public class suggestionServiceImp implements suggestionService{
      * */
 
     @Override
-    public String createSugesstion(int citizenID,sugesstion sugesstion){
+    public String create_Sugesstion(int citizenID, sugesstion sugesstion){
 
         normalUser user = normaluserRepository.getReferenceById(citizenID);
         sugesstion.setNormalUser(user);
@@ -47,17 +47,17 @@ public class suggestionServiceImp implements suggestionService{
     }
 
     @Override
-    public void deleteSuggestionb(int suggestionid) {
+    public void delete_Suggestion(int suggestionid) {
 
     }
 
     @Override
-    public void getUserSugesstionsbyUserId(int userId) {
+    public void get_User_Sugesstion_sbyUserId(int userId) {
 
     }
 
     @Override
-    public List<sugesstion> getAllSugesstions() {
+    public List<sugesstion> get_All_Sugesstions() {
 
 
         List<sugesstion> suggestionList =  sugesstionRepository.findAll();

@@ -7,9 +7,9 @@ import java.util.Optional;
 
 public interface driverService {
 
-    public List<driver> getAllDrivers();
+    public List<driver> get_AllDrivers();
 
-    public Optional<driver> getDriverById(int id);
+    public Optional<driver> get_Driver_ById(int id);
 
     public void createDriver(driver driverObj);
 

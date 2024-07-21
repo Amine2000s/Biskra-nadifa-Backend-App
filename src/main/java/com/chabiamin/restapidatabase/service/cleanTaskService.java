@@ -9,9 +9,9 @@ public interface cleanTaskService {
 
 
 
-    public List<cleanTask> getAllTasks() ;
-    public cleanTask getTaskbyId(int taskid) ;
+    public List<cleanTask> get_AllTasks() ;
+    public cleanTask get_Task_byId(int taskid) ;
 
-    public List<cleanTask> getTasksbyDriverId(int driverId) ;
+    public List<cleanTask> get_Tasks_by_DriverId(int driverId) ;
 
 }

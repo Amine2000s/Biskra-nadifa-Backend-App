@@ -74,7 +74,7 @@ class driverApiTest {
         cleanTasklist.add(task2);
 
 
-        when(cleanTaskServiceImp.getTasksbyDriverId(1)).thenReturn( cleanTasklist);
+        when(cleanTaskServiceImp.get_Tasks_by_DriverId(1)).thenReturn( cleanTasklist);
 
         ResultActions result = mockMvc.perform(get("/drivers/{driverId}/tasks",1))
                 .andDo(print());

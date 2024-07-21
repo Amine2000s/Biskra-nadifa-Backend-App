@@ -37,7 +37,7 @@ public class reportsServiceImp implements reportsService  {
 
     }
     @Override
-    public String addReport(Report report) throws IOException {
+    public String add_Report(Report report) throws IOException {
 
 
         // this Process transfome the Base64 String to the actual jpeg image , it's used to verify the Image Correctness
@@ -59,7 +59,7 @@ public class reportsServiceImp implements reportsService  {
 
     @Override
 
-    public String deleteReport(int reportID) {
+    public String delete_Report(int reportID) {
 
         reportsrepository.deleteById(reportID);
 
@@ -67,7 +67,7 @@ public class reportsServiceImp implements reportsService  {
     }
     @Override
 
-    public Optional<Report> getReport(int reportID) {
+    public Optional<Report> get_Report(int reportID) {
 
         if(reportsrepository.findById(reportID).isEmpty()){
             return  null ;
@@ -78,7 +78,7 @@ public class reportsServiceImp implements reportsService  {
     }
     @Override
 
-    public List<Report> getAllReports() {
+    public List<Report> get_AllReports() {
 
 
         List<Report> templist = reportsrepository.findAll();

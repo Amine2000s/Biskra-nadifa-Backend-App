@@ -16,7 +16,7 @@ public class cleanTaskServiceImp implements cleanTaskService{
         this.cleantaskRepository = cleantaskRepository;
     }
 
-    public List<cleanTask> getTasksbyDriverId(int driverId){
+    public List<cleanTask> get_Tasks_by_DriverId(int driverId){
 
         return cleantaskRepository.findTasksByID(driverId);
 
@@ -30,14 +30,14 @@ public class cleanTaskServiceImp implements cleanTaskService{
     }
 
     @Override
-    public List<cleanTask> getAllTasks() {
+    public List<cleanTask> get_AllTasks() {
 
         return cleantaskRepository.findAll();
 
     }
 
     @Override
-    public cleanTask getTaskbyId(int taskid) {
+    public cleanTask get_Task_byId(int taskid) {
 
          return  cleantaskRepository.findById(taskid).orElseThrow(()->
                   new TaskNotFoundException("Task Not Found with Id" + taskid));

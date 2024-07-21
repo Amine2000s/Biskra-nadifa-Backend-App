@@ -2,15 +2,12 @@ package com.chabiamin.restapidatabase.controller;
 
 import com.chabiamin.restapidatabase.exception.ReportExceptions.ReportNotFoundException;
 import com.chabiamin.restapidatabase.model.Report;
-import com.chabiamin.restapidatabase.model.cleanTask;
 import com.chabiamin.restapidatabase.model.driver;
-import com.chabiamin.restapidatabase.model.systemUser;
 import com.chabiamin.restapidatabase.service.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -18,13 +15,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.ResultMatcher;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -93,7 +87,7 @@ class dashboardApiTest {
     void get_Report_ById_onSuccess() throws Exception {
 
 
-        when(reportsServiceImp.getReport(1)).thenReturn(Optional.ofNullable(report));
+        when(reportsServiceImp.get_Report(1)).thenReturn(Optional.ofNullable(report));
 
         ResultActions result = mockMvc.perform(get("/dashboard/reports/{reportId}",1)
                 .contentType(MediaType.APPLICATION_JSON))
@@ -107,7 +101,7 @@ class dashboardApiTest {
     @Test
     void get_Report_ById_on_report_NotFound() throws Exception {
 
-        when(reportsServiceImp.getReport(1)).thenThrow(new ReportNotFoundException("Report is Not found"));
+        when(reportsServiceImp.get_Report(1)).thenThrow(new ReportNotFoundException("Report is Not found"));
 
         mockMvc.perform(get("/dashboard/reports/{reportId}",1))
                 .andDo(print())
@@ -119,7 +113,7 @@ class dashboardApiTest {
     @Test
     void delete_Report_ById() throws Exception{
 
-        when(reportsServiceImp.deleteReport(1)).thenReturn(" Delete Done with Success ");
+        when(reportsServiceImp.delete_Report(1)).thenReturn(" Delete Done with Success ");
 
         mockMvc.perform(delete("/dashboard/report/{reportId}",1))
                 .andDo(print())
@@ -149,10 +143,10 @@ class dashboardApiTest {
         int driverId = 2 ;
 
 
-        when(driverserviceimp.getDriverById(driverId)).thenReturn(Optional.of(new driver()));
-        when(reportsServiceImp.getReport(reportId)).thenReturn(Optional.ofNullable(new Report()));
+        when(driverserviceimp.get_Driver_ById(driverId)).thenReturn(Optional.of(new driver()));
+        when(reportsServiceImp.get_Report(reportId)).thenReturn(Optional.ofNullable(new Report()));
 
-        when(dashboardserviceimp.CreateTask(2,2,2)).thenReturn("task created with success");
+        when(dashboardserviceimp.Create_Task(2,2,2)).thenReturn("task created with success");
 /*
         mockMvc.perform(put("/dashboard/assigntask/{reportId}/{systemUserId}/{driverId}",reportId,systemUserId,driverId)
                          .accept(MediaType.APPLICATION_JSON))
@@ -188,7 +182,7 @@ class dashboardApiTest {
         int taskId= 1 ;
         int DriverId= 3 ;
 
-        when(dashboardserviceimp.changeassinedDriver(1,3)).thenReturn("update of driver task done with success " );
+        when(dashboardserviceimp.change_assigned_Driver(1,3)).thenReturn("update of driver task done with success " );
 
         mockMvc.perform(patch("/dashboard/tasks/{taskId}/modify-driver", taskId)
                         .param("driverId", String.valueOf(DriverId))

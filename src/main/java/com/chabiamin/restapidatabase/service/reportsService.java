@@ -1,7 +1,6 @@
 package com.chabiamin.restapidatabase.service;
 
 import com.chabiamin.restapidatabase.model.Report;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,12 +18,12 @@ public interface reportsService {
      * deleting Report
      * */
 
-    public String addReport(Report report) throws IOException;
-    public Optional<Report> getReport(int reportID);
-    public List<Report> getAllReports();
+    public String add_Report(Report report) throws IOException;
+    public Optional<Report> get_Report(int reportID);
+    public List<Report> get_AllReports();
 
 
-    public String deleteReport(int  reportID);
+    public String delete_Report(int  reportID);
 
 
 
