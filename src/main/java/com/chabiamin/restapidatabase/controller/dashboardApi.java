@@ -150,12 +150,14 @@ public class dashboardApi {
         return "update of driver task done with success " ;
     }
 
+    @Operation(description = "Returns a List of citizens")
 
     @GetMapping("/citizens")
     public List<normalUser> get_All_Citizens(){
 
         return dashboardserviceimp.get_All_Citizens() ;
     }
+    @Operation(description = "Returns a List of System users")
 
     @GetMapping("/systemusers")
     public List<systemUser> get_All_Systemusers(){
@@ -163,12 +165,16 @@ public class dashboardApi {
         return dashboardserviceimp.get_All_SystemUsers() ;
     }
 
+    @Operation(description = "Returns a List of bins")
 
     @GetMapping("/bins")
     public List<modernBin> get_All_bins(){
 
         return modernbinServiceimp.getAllBin() ;
     }
+
+
+    @Operation(description = "Create a Bin")
 
     @PostMapping("/bins/create")
     public void create_Bin(@RequestBody modernBin bin){
@@ -177,6 +183,7 @@ public class dashboardApi {
 
 
     }
+    @Operation(description = "get a Bin by ID")
 
     @DeleteMapping("bins/bin/{binid}")
     public void delete_Bin_byID(@PathVariable int binid){
@@ -186,12 +193,15 @@ public class dashboardApi {
 
 
     }
+    @Operation(description = "return a list of trash collection schedule ")
 
     @GetMapping("/trashcollectionSchedule")
     public List<trashCollectionSchedule> get_All_Trash_Collection_Schedule(){
 
         return trashcollectionscheduleserviceImp.getAllSchedule() ;
     }
+
+    @Operation(description = "create a trash Collection Schedule ")
 
     @PostMapping("/trashcollectionSchedule/create")
     public void add_Trash_Collection_Schedule(@RequestBody trashCollectionSchedule trashcollection){
