@@ -85,7 +85,7 @@ public class dashboardServiceImp implements dashboardService{
        }
 
 
-        cleantask.setAssigneddriver(driver1.get());
+        cleantask.setAssigneddriver(driver1);
 
         cleantaskrepository.save(cleantask);
 

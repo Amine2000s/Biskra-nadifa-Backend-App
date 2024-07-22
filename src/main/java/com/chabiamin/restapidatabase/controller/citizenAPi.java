@@ -4,7 +4,7 @@ package com.chabiamin.restapidatabase.controller;
 import com.chabiamin.restapidatabase.exception.ReportExceptions.ReportImageNotUploadedException;
 import com.chabiamin.restapidatabase.model.Report;
 import com.chabiamin.restapidatabase.model.modernBin;
-import com.chabiamin.restapidatabase.model.sugesstion;
+import com.chabiamin.restapidatabase.model.suggestion;
 import com.chabiamin.restapidatabase.model.trashCollectionSchedule;
 import com.chabiamin.restapidatabase.repository.reportsRepository;
 import com.chabiamin.restapidatabase.service.*;
@@ -53,7 +53,7 @@ public class citizenAPi {
 
 
     @PostMapping("/suggestion/{citizenId}")
-    public ResponseEntity<String> create_suggestion(@PathVariable int citizenId , @RequestBody sugesstion suggestioninput){
+    public ResponseEntity<String> create_suggestion(@PathVariable int citizenId , @RequestBody suggestion suggestioninput){
 
         suggestionService.create_Sugesstion(citizenId,suggestioninput);
 

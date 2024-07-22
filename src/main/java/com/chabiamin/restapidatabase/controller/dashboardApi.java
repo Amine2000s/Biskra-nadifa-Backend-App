@@ -4,6 +4,7 @@ import com.chabiamin.restapidatabase.exception.DriverException.DriverNotFoundExc
 import com.chabiamin.restapidatabase.exception.ReportExceptions.ReportNotFoundException;
 import com.chabiamin.restapidatabase.model.*;
 import com.chabiamin.restapidatabase.service.*;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -50,12 +51,14 @@ public class dashboardApi {
         this.cleantaskserviceImp = cleantaskserviceImp ;
     }
 
+    @Operation(description = "Returns a List of All Drivers ")
     @GetMapping("/drivers")
     public List<driver> get_All_Drivers(){
 
 
         return driverserviceimp.get_AllDrivers() ;
     }
+    @Operation(description = "Adds a driver  ")
 
     @PostMapping("driver/create")
     public String create_Driver(@RequestBody driver driverobj){
@@ -69,6 +72,7 @@ public class dashboardApi {
 
         return  reportsServiceImp.get_AllReports();
     }
+    @Operation(description = "get Report as per the id")
 
     @GetMapping("/reports/{reportId}")
     public Optional<Report> get_Report_ById(@PathVariable int reportId){
@@ -82,9 +86,10 @@ public class dashboardApi {
        }
     }
 
+    @Operation(description = "Delete Report as per the id")
 
     @DeleteMapping("/report/{reportId}")
-    public String delete_Report_Byid(@PathVariable int reportId){
+    public String delete_Report_ById(@PathVariable int reportId){
 
         reportsServiceImp.delete_Report(reportId);
 
@@ -92,11 +97,17 @@ public class dashboardApi {
         return "Delete Operation Done with success " ;
     }
 
+
+    @Operation(description = "Returns a List of Suggestions")
+
     @GetMapping("/suggestions")
-    public List<sugesstion> get_All_Sugesstion(){
+    public List<suggestion> get_All_Sugesstion(){
 
         return suggestionserviceimp.get_All_Sugesstions() ;
     }
+
+
+    @Operation(description = "Returns a List of tasks")
 
     @GetMapping("/tasks")
     public List<cleanTask> get_All_CleaningTasks(){
@@ -113,7 +124,7 @@ public class dashboardApi {
    // http://localhost:8083/dashboard/tasks/?reportId=2&assignerId=3&assignedId=4
 
 
-
+    @Operation(description = "Creates a Task")
     @PutMapping(value="/assigntask/{reportId}/{systemUserId}/{driverId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> create_Task(@PathVariable("reportId") int reportId , @PathVariable("systemUserId") int assignerId, @PathVariable("driverId") int assignedId ){
 
@@ -128,6 +139,8 @@ public class dashboardApi {
 
         return new ResponseEntity<>(new Object(),HttpStatus.CREATED) ;
     }
+
+    @Operation(description = "modify the Responsible Driver of the Cleaning Task")
 
     @PatchMapping("tasks/{taskId}/modify-driver")
     public String Update_Assigned_Driver(@PathVariable("taskId") int taskId ,@RequestParam(name="driverId") int driverId ){

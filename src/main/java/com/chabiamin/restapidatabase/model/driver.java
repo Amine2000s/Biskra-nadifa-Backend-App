@@ -17,6 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
  @NoArgsConstructor
 @Table(name="driver")
+
 public class driver {
 
     @Id

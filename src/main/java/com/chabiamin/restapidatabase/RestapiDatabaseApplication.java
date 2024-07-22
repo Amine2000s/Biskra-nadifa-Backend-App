@@ -38,9 +38,9 @@ public class RestapiDatabaseApplication {
 				"1.0",
 				"Biskra Nadifa Terms",
 				new Contact("Chabi Amine ", "https://github.com/Amine2000s",
-						"chabiaminesifeedine@gmail.com"),
-				"",
-				"",
+						"chabiaminesifeedine@gmail.com "),
+				" ",
+				" ",
 				Collections.emptyList()
 		);
 	}

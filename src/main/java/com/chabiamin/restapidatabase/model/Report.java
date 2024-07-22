@@ -1,5 +1,7 @@
 package com.chabiamin.restapidatabase.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.Builder;
@@ -10,7 +12,7 @@ import java.util.Arrays;
 @Builder
 @Table(name="report")
 //@Builder
-
+@ApiModel(description = "Report Details")
 public class Report {
 
     @Id
@@ -41,6 +43,8 @@ public class Report {
     @Nullable
 
     String image ;
+
+    @ApiModelProperty("it Contains the Image Data , it Should be A base64 String ")
     @Column(name="image-data")
     @Nullable
 

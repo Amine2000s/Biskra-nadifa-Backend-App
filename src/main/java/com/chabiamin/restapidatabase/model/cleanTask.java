@@ -1,5 +1,6 @@
 package com.chabiamin.restapidatabase.model;
 
+import io.swagger.annotations.ApiModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,6 +15,7 @@ import java.util.Optional;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel(description = "Contains ALl Details about the Clean Task ")
 public class cleanTask {
 
     @Id
@@ -45,7 +47,7 @@ public class cleanTask {
 
         this.setReport(report);
         this.setAssingerSystemUser(systemuser);
-        this.setAssigneddriver(Driver);
+        this.setAssigneddriver(Optional.ofNullable(Driver));
 
     }
 
@@ -65,9 +67,9 @@ public class cleanTask {
         return Assigneddriver;
     }
 
-    public void setAssigneddriver(driver assigneddriver) {
+   /* public void setAssigneddriver(driver assigneddriver) {
         Assigneddriver = assigneddriver;
-    }
+    }*/
     public void setAssigneddriver(Optional<driver> assigneddriver) {
                 driver driverobject = assigneddriver.get();
         Assigneddriver = driverobject;

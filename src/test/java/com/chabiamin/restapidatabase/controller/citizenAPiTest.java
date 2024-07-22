@@ -63,7 +63,7 @@ class citizenAPiTest {
     modernBin modernbin1 ;
      modernBin modernbin2 ;
 
-     sugesstion suggestion ;
+     com.chabiamin.restapidatabase.model.suggestion suggestion ;
      List<modernBin> modernBinList  ;
 
 

@@ -1,7 +1,7 @@
 package com.chabiamin.restapidatabase.service;
 
 import com.chabiamin.restapidatabase.model.normalUser;
-import com.chabiamin.restapidatabase.model.sugesstion;
+import com.chabiamin.restapidatabase.model.suggestion;
 import com.chabiamin.restapidatabase.repository.normalUserRepository;
 import com.chabiamin.restapidatabase.repository.sugesstionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +35,12 @@ public class suggestionServiceImp implements suggestionService{
      * */
 
     @Override
-    public String create_Sugesstion(int citizenID, sugesstion sugesstion){
+    public String create_Sugesstion(int citizenID, suggestion suggestion){
 
         normalUser user = normaluserRepository.getReferenceById(citizenID);
-        sugesstion.setNormalUser(user);
+        suggestion.setNormalUser(user);
 
-        sugesstionRepository.save(sugesstion);
+        sugesstionRepository.save(suggestion);
 
         return "Suggestion created With success" ;
 
@@ -57,10 +57,10 @@ public class suggestionServiceImp implements suggestionService{
     }
 
     @Override
-    public List<sugesstion> get_All_Sugesstions() {
+    public List<suggestion> get_All_Sugesstions() {
 
 
-        List<sugesstion> suggestionList =  sugesstionRepository.findAll();
+        List<suggestion> suggestionList =  sugesstionRepository.findAll();
 
         return suggestionList ;
 
