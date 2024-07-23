@@ -8,6 +8,7 @@ import com.chabiamin.restapidatabase.model.suggestion;
 import com.chabiamin.restapidatabase.model.trashCollectionSchedule;
 import com.chabiamin.restapidatabase.repository.reportsRepository;
 import com.chabiamin.restapidatabase.service.*;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +53,8 @@ public class citizenAPi {
 
 
 
+    @Operation(description = "create a Suggestion")
+
     @PostMapping("/suggestion/{citizenId}")
     public ResponseEntity<String> create_suggestion(@PathVariable int citizenId , @RequestBody suggestion suggestioninput){
 
@@ -63,6 +66,8 @@ public class citizenAPi {
 
 
     // The Client Send a Base64 String which represents the Image report
+
+    @Operation(description = "create a Report")
 
     @PostMapping(value = "/Report")
     public ResponseEntity<String> upload_Report(@RequestBody Report report) throws IOException {
@@ -76,13 +81,16 @@ public class citizenAPi {
 
     }
 
+    @Operation(description = "return a list of Bins ")
+
     @GetMapping("/bins")
     public List<modernBin> get_AllBins(){
 
         return modernBinServiceImp.getAllBin() ;
     }
+    @Operation(description = "return a list of trash collection schedule ")
 
-    @GetMapping("/trashcollectionSchedule")
+    @GetMapping("/trash-collection-Schedule")
     public List<trashCollectionSchedule> get_All_TrashCollection_Schedule(){
 
         return trashcollectionScheduleservice.getAllSchedule() ;

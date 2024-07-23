@@ -58,8 +58,8 @@ public class dashboardApi {
 
         return driverserviceimp.get_AllDrivers() ;
     }
-    @Operation(description = "Adds a driver  ")
 
+    @Operation(description = "Adds a driver  ")
     @PostMapping("driver/create")
     public String create_Driver(@RequestBody driver driverobj){
 
@@ -67,13 +67,14 @@ public class dashboardApi {
 
         return "driver created with succes" ;
     }
+
     @GetMapping("/reports")
     public List<Report> get_All_Reports(){
 
         return  reportsServiceImp.get_AllReports();
     }
-    @Operation(description = "get Report as per the id")
 
+    @Operation(description = "get Report as per the id")
     @GetMapping("/reports/{reportId}")
     public Optional<Report> get_Report_ById(@PathVariable int reportId){
 
@@ -87,7 +88,6 @@ public class dashboardApi {
     }
 
     @Operation(description = "Delete Report as per the id")
-
     @DeleteMapping("/report/{reportId}")
     public String delete_Report_ById(@PathVariable int reportId){
 
@@ -98,8 +98,8 @@ public class dashboardApi {
     }
 
 
-    @Operation(description = "Returns a List of Suggestions")
 
+    @Operation(description = "Returns a List of Suggestions")
     @GetMapping("/suggestions")
     public List<suggestion> get_All_Sugesstion(){
 
@@ -107,8 +107,8 @@ public class dashboardApi {
     }
 
 
-    @Operation(description = "Returns a List of tasks")
 
+    @Operation(description = "Returns a List of tasks")
     @GetMapping("/tasks")
     public List<cleanTask> get_All_CleaningTasks(){
 
@@ -141,7 +141,6 @@ public class dashboardApi {
     }
 
     @Operation(description = "modify the Responsible Driver of the Cleaning Task")
-
     @PatchMapping("tasks/{taskId}/modify-driver")
     public String Update_Assigned_Driver(@PathVariable("taskId") int taskId ,@RequestParam(name="driverId") int driverId ){
 
@@ -150,8 +149,8 @@ public class dashboardApi {
         return "update of driver task done with success " ;
     }
 
-    @Operation(description = "Returns a List of citizens")
 
+    @Operation(description = "Returns a List of citizens")
     @GetMapping("/citizens")
     public List<normalUser> get_All_Citizens(){
 
@@ -166,7 +165,6 @@ public class dashboardApi {
     }
 
     @Operation(description = "Returns a List of bins")
-
     @GetMapping("/bins")
     public List<modernBin> get_All_bins(){
 
@@ -175,8 +173,7 @@ public class dashboardApi {
 
 
     @Operation(description = "Create a Bin")
-
-    @PostMapping("/bins/create")
+    @PostMapping("/bin/create")
     public void create_Bin(@RequestBody modernBin bin){
 
         modernbinServiceimp.addBin(bin);
@@ -185,10 +182,10 @@ public class dashboardApi {
     }
     @Operation(description = "get a Bin by ID")
 
-    @DeleteMapping("bins/bin/{binid}")
-    public void delete_Bin_byID(@PathVariable int binid){
+    @DeleteMapping("/bin/{binId}")
+    public void delete_Bin_byID(@PathVariable int binId){
 
-        modernbinServiceimp.deleteBin(binid);
+        modernbinServiceimp.deleteBin(binId);
 
 
 
