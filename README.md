@@ -50,7 +50,7 @@
     * Update Assigned Tasks Status (Completed , Not Completed, on Proccess ...)
 ## Installation & Run 
 
-* Before running the API server, you should update the database config inside the [application.properties](\src\main\resources\application.properties) file.
+* Before running the API server, you should update the database config inside the [application.properties](/src/main/resources/application.properties) file.
 
 
 * By Default the Api's Will be running on port 8083
